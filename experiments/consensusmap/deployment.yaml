@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atomix-experiment
+spec:
+  selector:
+    matchLabels:
+      name: atomix-experiment
+  template:
+    metadata:
+      labels:
+        name: atomix-experiment
+        proxy.atomix.io/inject: "true"
+        proxy.atomix.io/profile: "atomix-experiment"
+    spec:
+      containers:
+      - name: consensusmap-client
+        image: consensusmap-client:local

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-application
+spec:
+  selector:
+    matchLabels:
+      name: my-application
+  template:
+    metadata:
+      labels:
+        name: my-application
+        proxy.atomix.io/inject: "true"
+        proxy.atomix.io/profile: "my-application"
+
+    spec:
+      containers:
+      - name: sharedmemorycounter-client
+        image: sharedmemorycounter-client:local
