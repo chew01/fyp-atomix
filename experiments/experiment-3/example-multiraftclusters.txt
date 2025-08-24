@@ -1,0 +1,64 @@
+Name:         consensus-storelusters.consensus.atomix.io
+Namespace:    default
+Labels:       atomix.io/store=consensus-store
+              multiraft.atomix.io/store=consensus-store
+Annotations:  atomix.io/store: consensus-store
+              multiraft.atomix.io/store: consensus-store
+API Version:  consensus.atomix.io/v1beta1
+Kind:         MultiRaftCluster
+Metadata:
+  Creation Timestamp:  2025-08-24T05:19:50Z
+  Generation:          1
+  Owner References:
+    API Version:           consensus.atomix.io/v1beta1
+    Block Owner Deletion:  true
+    Controller:            true
+    Kind:                  ConsensusStore
+    Name:                  consensus-store
+    UID:                   bae26bb1-3db6-47a8-8d0c-7ff2d93730a5
+  Resource Version:        974
+  UID:                     a73db2d5-9a65-486f-94f4-a0d9fd19cd44
+Spec:
+  Config:
+    Logging:
+    Raft:
+    Server:
+      Max Concurrent Streams:  <nil>
+      Max Recv Msg Size:       <nil>
+      Max Send Msg Size:       <nil>
+      Num Stream Workers:      <nil>
+      Read Buffer Size:        <nil>
+      Write Buffer Size:       <nil>
+  Groups:                      3
+  Replicas:                    3
+  Volume Claim Template:
+    Metadata:
+      Creation Timestamp:  <nil>
+    Spec:
+      Access Modes:
+        ReadWriteOnce
+      Resources:
+        Requests:
+          Storage:         8Gi
+      Storage Class Name:  standard
+      Volume Mode:         Filesystem
+    Status:
+Status:
+  Partitions:
+    Followers:
+      consensus-store-1.consensus-store-hs.default.svc.cluster.local:5678
+      consensus-store-2.consensus-store-hs.default.svc.cluster.local:5678
+    Leader:        consensus-store-0.consensus-store-hs.default.svc.cluster.local:5678
+    Partition ID:  1
+    Followers:
+      consensus-store-1.consensus-store-hs.default.svc.cluster.local:5678
+      consensus-store-2.consensus-store-hs.default.svc.cluster.local:5678
+    Leader:        consensus-store-0.consensus-store-hs.default.svc.cluster.local:5678
+    Partition ID:  2
+    Followers:
+      consensus-store-2.consensus-store-hs.default.svc.cluster.local:5678
+      consensus-store-0.consensus-store-hs.default.svc.cluster.local:5678
+    Leader:        consensus-store-1.consensus-store-hs.default.svc.cluster.local:5678
+    Partition ID:  3
+  State:           Ready
+Events:            <none>

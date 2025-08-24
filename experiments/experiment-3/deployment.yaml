@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atomix-experiment
+spec:
+  selector:
+    matchLabels:
+      name: atomix-experiment
+  template:
+    metadata:
+      labels:
+        name: atomix-experiment
+        proxy.atomix.io/inject: "true"
+        proxy.atomix.io/profile: "atomix-experiment"
+    spec:
+      serviceAccountName: atomix-experiment-sa
+      containers:
+      - name: experiment-client
+        image: experiment-client:local
+        env:
+        - name: WRITE_INTERVAL
+          value: "1"
+        - name: READ_INTERVAL
+          value: "2"
+        - name: TEST_DURATION
+          value: "600"
+        - name: LOG_FILE
+          value: "/app/logs/failover-test-results.log"
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        volumeMounts:
+        - name: log-volume
+          mountPath: /app/logs
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+      volumes:
+      - name: log-volume
+        emptyDir: {}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: atomix-experiment-sa
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: consensus-store-monitor
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["consensus.atomix.io"]
+  resources: ["raftgroups", "multiraftclusters", "consensusstores"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: atomix-experiment-binding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: atomix-experiment-sa
+  namespace: default
+roleRef:
+  kind: Role
+  name: consensus-store-monitor
+  apiGroup: rbac.authorization.k8s.io
