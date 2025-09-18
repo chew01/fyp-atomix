@@ -2,100 +2,48 @@ package main
 
 import (
 	"context"
-	"fmt"
-	"io"
 	"log"
 	"os"
-	"reflect"
+	"os/signal"
+	"syscall"
 	"time"
 
+	"prototype/controller/election"
+	"prototype/controller/membership"
+
 	"github.com/atomix/go-sdk/pkg/atomix"
-	"github.com/atomix/go-sdk/pkg/generic"
-	"github.com/atomix/go-sdk/pkg/primitive/election"
+	election2 "github.com/atomix/go-sdk/pkg/primitive/election"
 )
 
-// Simple device list for PoC
 var devices = []string{"Switch-A", "Switch-B", "Switch-C"}
 
 func main() {
-	ctx := context.Background()
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 
 	hostname, _ := os.Hostname()
-	var elections []election.Election
+	var elections []election2.Election
 
-	for _, dev := range devices {
-		electionName := fmt.Sprintf("election-%s", dev)
-		e, err := atomix.LeaderElection(electionName).CandidateID(hostname).Get(ctx)
+	// Start elections
+	for _, device := range devices {
+		e, err := atomix.LeaderElection("election-" + device).
+			CandidateID(hostname).
+			Get(ctx)
 		if err != nil {
-			log.Fatalf("[%s] Failed to create leader election: %v", dev, err)
+			log.Fatalf("[Election] (%s) Failed to create election: %v", device, err)
 		}
-
 		elections = append(elections, e)
-		go participateInElection(ctx, hostname, dev, e)
-	}
-}
 
-func participateInElection(ctx context.Context, hostname string, device string, e election.Election) {
-	term, err := e.Enter(ctx)
-	if err != nil {
-		log.Fatalf("[%s] Failed to enter election: %v", device, err)
-	}
-	log.Printf("[%s] Entered election successfully as candidate %s (current leader: %s, term %d)", device, hostname, term.Leader, term.ID)
-
-	stream, err := e.Watch(ctx)
-	if err != nil {
-		log.Printf("[%s] Failed to watch election: %v", device, err)
+		go election.RunElection(ctx, hostname, e)
 	}
 
-	configMap, err := atomix.Map[string, string]("config").Codec(generic.Scalar[string]()).Get(ctx)
-	if err != nil {
-		log.Printf("[%s] Error accessing configMap: %v", device, err)
-	}
+	// Start membership heartbeat + monitor
+	membership.StartHeartbeat(ctx, hostname, 5*time.Second)
+	membership.MonitorMembership(ctx, 15*time.Second, elections)
 
-	var cache *election.Term
-
-	for {
-		term, err := stream.Next()
-		if err != nil {
-			if err == io.EOF {
-				log.Printf("[%s] Got EOF, terminating loop", device)
-				return
-			}
-			log.Printf("[%s] Error in election stream: %v", device, err)
-			time.Sleep(time.Second)
-			continue
-		}
-
-		if cache == nil || cache.ID != term.ID {
-			log.Printf("[%s] New election term: Term %d", device, term.ID)
-		}
-
-		if cache == nil || !reflect.DeepEqual(cache.Candidates, term.Candidates) {
-			log.Printf("[%s] Election candidates updated: %v", device, term.Candidates)
-		}
-
-		if cache == nil || cache.Leader != term.Leader {
-			if term.Leader == e.CandidateID() {
-				log.Printf("[%s] ✅ I am now LEADER in term %d\n", device, term.ID)
-
-				// Example: leader writes state into distributed map
-				value := fmt.Sprintf("Leader %s updated state at %s", hostname, time.Now().Format(time.RFC3339))
-				if _, err := configMap.Put(ctx, device, value); err != nil {
-					log.Printf("[%s] Failed to write state: %v", device, err)
-				} else {
-					log.Printf("[%s] State updated in map: %s -> %s\n", device, device, value)
-				}
-			} else {
-				log.Printf("[%s] ℹ️ Current leader: %s (term %d)\n", device, term.Leader, term.ID)
-
-				// Followers can read the current state
-				val, err := configMap.Get(ctx, device)
-				if err == nil {
-					log.Printf("[%s] Follower sees state: %s -> %s\n", device, device, val.Value)
-				}
-			}
-		}
-
-		cache = term
-	}
+	// Wait for SIGTERM
+	sig := make(chan os.Signal, 1)
+	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
+	<-sig
+	log.Println("Shutting down...")
 }
