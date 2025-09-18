@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prototype
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: prototype
+  template:
+    metadata:
+      labels:
+        name: prototype
+        proxy.atomix.io/inject: "true"
+        proxy.atomix.io/profile: "prototype-profile"
+    spec:
+      containers:
+      - name: prototype-controller
+        image: prototype-controller:local
