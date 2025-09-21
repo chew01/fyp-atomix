@@ -8,6 +8,7 @@ import (
 	"syscall"
 	"time"
 
+	"prototype/controller/device"
 	"prototype/controller/heartbeat"
 	"prototype/controller/leadership"
 	"prototype/controller/membership"
@@ -16,18 +17,26 @@ import (
 	election "github.com/atomix/go-sdk/pkg/primitive/election"
 )
 
-var devices = []string{"Switch-A", "Switch-B", "Switch-C"}
+var devices = []*device.Device{
+	device.NewDevice("Switch-A", &device.FakeDriver{}),
+	device.NewDevice("Switch-B", &device.FakeDriver{}),
+	device.NewDevice("Switch-C", &device.FakeDriver{}),
+}
 
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
+
+	for _, dev := range devices {
+		go dev.PollStatus(ctx)
+	}
 
 	hostname, _ := os.Hostname()
 	var elections []election.Election
 
 	// Start elections
 	for _, device := range devices {
-		e, err := atomix.LeaderElection("election-" + device).
+		e, err := atomix.LeaderElection("election-" + device.ID).
 			CandidateID(hostname).
 			Get(ctx)
 		if err != nil {
