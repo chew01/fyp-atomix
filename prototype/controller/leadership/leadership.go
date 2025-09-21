@@ -1,4 +1,4 @@
-package election
+package leadership
 
 import (
 	"context"
@@ -14,16 +14,16 @@ import (
 func RunElection(ctx context.Context, hostname string, e election.Election) {
 	electionName := e.Name()
 	// Join election
-	term, err := e.Enter(ctx)
+	_, err := e.Enter(ctx)
 	if err != nil {
-		log.Fatalf("[Election] (%s) Failed to enter election: %v", electionName, err)
+		log.Fatalf("[Leadership] (%s) Failed to enter election: %v", electionName, err)
 	}
-	log.Printf("[Election] (%s) Entered election: leader=%s, term=%d", electionName, term.Leader, term.ID)
+	log.Printf("[Leadership] (%s) Entered election", electionName)
 
 	// Watch election
 	stream, err := e.Watch(ctx)
 	if err != nil {
-		log.Printf("[Election] (%s) Failed to watch election: %v", electionName, err)
+		log.Printf("[Leadership] (%s) Failed to watch election: %v", electionName, err)
 		return
 	}
 
@@ -32,34 +32,35 @@ func RunElection(ctx context.Context, hostname string, e election.Election) {
 		Codec(generic.Scalar[string]()).
 		Get(ctx)
 	if err != nil {
-		log.Printf("[Election] (%s) Error accessing config map: %v", electionName, err)
+		log.Printf("[Leadership] (%s) Error accessing config map: %v", electionName, err)
 	}
+	defer configMap.Close(ctx)
 
 	var cache *election.Term
 	for {
 		term, err := stream.Next()
 		if err != nil {
-			log.Printf("[Election] (%s) Error in election stream: %v", electionName, err)
+			log.Printf("[Leadership] (%s) Error in election stream: %v", electionName, err)
 			time.Sleep(time.Second)
 			continue
 		}
 
 		if cache == nil || cache.ID != term.ID {
-			log.Printf("[Election] (%s) New term: %d", electionName, term.ID)
+			log.Printf("[Leadership] (%s) New term: %d", electionName, term.ID)
 		}
 		if cache == nil || !reflect.DeepEqual(cache.Candidates, term.Candidates) {
-			log.Printf("[Election] (%s) Candidates: %v", electionName, term.Candidates)
+			log.Printf("[Leadership] (%s) Candidates: %v", electionName, term.Candidates)
 		}
 
 		if cache == nil || cache.Leader != term.Leader {
 			if term.Leader == e.CandidateID() {
-				log.Printf("[Election] (%s) ✅ I am leader (term %d)", electionName, term.ID)
+				log.Printf("[Leadership] (%s) ✅ I am leader (term %d)", electionName, term.ID)
 				value := "leader " + hostname
 				_, _ = configMap.Put(ctx, electionName, value)
 			} else {
-				log.Printf("[Election] (%s) ℹ️ Current leader: %s", electionName, term.Leader)
+				log.Printf("[Leadership] (%s) ℹ️ Current leader: %s", electionName, term.Leader)
 				if val, err := configMap.Get(ctx, e.Name()); err == nil {
-					log.Printf("[Election] (%s) Follower sees: %s", electionName, val.Value)
+					log.Printf("[Leadership] (%s) Follower sees: %s", electionName, val.Value)
 				}
 			}
 		}

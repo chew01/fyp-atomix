@@ -8,11 +8,12 @@ import (
 	"syscall"
 	"time"
 
-	"prototype/controller/election"
+	"prototype/controller/heartbeat"
+	"prototype/controller/leadership"
 	"prototype/controller/membership"
 
 	"github.com/atomix/go-sdk/pkg/atomix"
-	election2 "github.com/atomix/go-sdk/pkg/primitive/election"
+	election "github.com/atomix/go-sdk/pkg/primitive/election"
 )
 
 var devices = []string{"Switch-A", "Switch-B", "Switch-C"}
@@ -22,7 +23,7 @@ func main() {
 	defer cancel()
 
 	hostname, _ := os.Hostname()
-	var elections []election2.Election
+	var elections []election.Election
 
 	// Start elections
 	for _, device := range devices {
@@ -34,12 +35,16 @@ func main() {
 		}
 		elections = append(elections, e)
 
-		go election.RunElection(ctx, hostname, e)
+		go leadership.RunElection(ctx, hostname, e)
 	}
 
-	// Start membership heartbeat + monitor
-	membership.StartHeartbeat(ctx, hostname, 5*time.Second)
-	membership.MonitorMembership(ctx, 15*time.Second, elections)
+	// Register as member
+	membership.Register(ctx, hostname)
+	go membership.Monitor(ctx)
+
+	// Start heartbeat + monitor
+	go heartbeat.StartHeartbeat(ctx, hostname, 5*time.Second)
+	go heartbeat.MonitorHeartbeat(ctx, 15*time.Second, elections)
 
 	// Wait for SIGTERM
 	sig := make(chan os.Signal, 1)
