@@ -17,34 +17,35 @@ import (
 	election "github.com/atomix/go-sdk/pkg/primitive/election"
 )
 
-var devices = []*device.Device{
-	device.NewDevice("Switch-A", &device.FakeDriver{}),
-	device.NewDevice("Switch-B", &device.FakeDriver{}),
-	device.NewDevice("Switch-C", &device.FakeDriver{}),
-}
-
 func main() {
+
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
+	devices := []*device.Device{
+		device.NewDevice("Switch-A", &device.FakeDriver{ID: "Switch-A"}),
+		device.NewDevice("Switch-B", &device.FakeDriver{ID: "Switch-B"}),
+		device.NewDevice("Switch-C", &device.FakeDriver{ID: "Switch-C"}),
+	}
+
 	for _, dev := range devices {
-		go dev.PollStatus(ctx)
+		go dev.PollStatus(ctx, 30*time.Second)
 	}
 
 	hostname, _ := os.Hostname()
 	var elections []election.Election
 
 	// Start elections
-	for _, device := range devices {
-		e, err := atomix.LeaderElection("election-" + device.ID).
+	for _, dev := range devices {
+		e, err := atomix.LeaderElection("election-" + dev.ID).
 			CandidateID(hostname).
 			Get(ctx)
 		if err != nil {
-			log.Fatalf("[Election] (%s) Failed to create election: %v", device, err)
+			log.Fatalf("[Election] (%s) Failed to create election: %v", dev.ID, err)
 		}
 		elections = append(elections, e)
 
-		go leadership.RunElection(ctx, hostname, e)
+		go leadership.RunElection(ctx, hostname, e, dev)
 	}
 
 	// Register as member

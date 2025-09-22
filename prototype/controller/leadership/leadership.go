@@ -3,6 +3,7 @@ package leadership
 import (
 	"context"
 	"log"
+	"prototype/controller/device"
 	"reflect"
 	"time"
 
@@ -11,7 +12,7 @@ import (
 	"github.com/atomix/go-sdk/pkg/primitive/election"
 )
 
-func RunElection(ctx context.Context, hostname string, e election.Election) {
+func RunElection(ctx context.Context, hostname string, e election.Election, dev *device.Device) {
 	electionName := e.Name()
 	// Join election
 	_, err := e.Enter(ctx)
@@ -57,11 +58,15 @@ func RunElection(ctx context.Context, hostname string, e election.Election) {
 				log.Printf("[Leadership] (%s) ✅ I am leader (term %d)", electionName, term.ID)
 				value := "leader " + hostname
 				_, _ = configMap.Put(ctx, electionName, value)
+				config := map[string]string{"flow": "allow all", "version": time.Now().Format(time.RFC3339)}
+				dev.ApplyConfig(ctx, config)
 			} else {
 				log.Printf("[Leadership] (%s) ℹ️ Current leader: %s", electionName, term.Leader)
-				if val, err := configMap.Get(ctx, e.Name()); err == nil {
-					log.Printf("[Leadership] (%s) Follower sees: %s", electionName, val.Value)
-				}
+				/*
+					if val, err := configMap.Get(ctx, e.Name()); err == nil {
+						log.Printf("[Leadership] (%s) Follower sees: %s", electionName, val.Value)
+					}
+				*/
 			}
 		}
 		cache = term
