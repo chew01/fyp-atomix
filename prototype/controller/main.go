@@ -8,6 +8,7 @@ import (
 	"syscall"
 	"time"
 
+	"prototype/controller/api"
 	"prototype/controller/device"
 	"prototype/controller/heartbeat"
 	"prototype/controller/leadership"
@@ -55,6 +56,9 @@ func main() {
 	// Start heartbeat + monitor
 	go heartbeat.StartHeartbeat(ctx, hostname, 5*time.Second)
 	go heartbeat.MonitorHeartbeat(ctx, 15*time.Second, elections)
+
+	// Start HTTP server
+	go api.StartServer(ctx, ":8080")
 
 	// Wait for SIGTERM
 	sig := make(chan os.Signal, 1)

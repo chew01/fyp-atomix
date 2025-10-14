@@ -2,7 +2,10 @@ module prototype/controller
 
 go 1.24.6
 
-require github.com/atomix/go-sdk v0.10.0
+require (
+	github.com/atomix/go-sdk v0.10.0
+	github.com/gorilla/mux v1.8.1
+)
 
 require (
 	github.com/atomix/runtime/api v0.7.0 // indirect

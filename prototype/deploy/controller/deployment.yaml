@@ -17,3 +17,5 @@ spec:
       containers:
       - name: prototype-controller
         image: prototype-controller:local
+        ports:
+        - containerPort: 8080
