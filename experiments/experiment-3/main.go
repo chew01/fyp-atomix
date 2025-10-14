@@ -198,6 +198,11 @@ func (ft *FailoverTest) leaderMonitor(ctx context.Context) {
 			for _, item := range raftGroups.Items {
 				groupName := item.GetName()
 
+				partNum, err := strconv.Atoi(strings.Split(groupName, "-")[2])
+				if err != nil {
+					ft.logMessage(fmt.Sprintf("LEADER_ERROR: Failed to convert group name to int: %v", err))
+				}
+
 				status, found, err := unstructured.NestedMap(item.Object, "status")
 				if err != nil || !found {
 					ft.logMessage(fmt.Sprintf("LEADER_ERROR: Failed to get status for RaftGroup %s: %v", groupName, err))
@@ -206,7 +211,7 @@ func (ft *FailoverTest) leaderMonitor(ctx context.Context) {
 
 				leader, found, err := unstructured.NestedMap(status, "leader")
 				if err != nil || !found {
-					leaderInfo = append(leaderInfo, fmt.Sprintf("%s:no-leader", groupName))
+					leaderInfo = append(leaderInfo, fmt.Sprintf("Partition %d: No Leader", partNum))
 					continue
 				}
 
@@ -226,10 +231,6 @@ func (ft *FailoverTest) leaderMonitor(ctx context.Context) {
 					state = "unknown"
 				}
 
-				partNum, err := strconv.Atoi(strings.Split(groupName, "-")[2])
-				if err != nil {
-					ft.logMessage(fmt.Sprintf("LEADER_ERROR: Failed to convert group name to int: %v", err))
-				}
 				podNum, err := strconv.Atoi(strings.Split(leaderName, "-")[3])
 				if err != nil {
 					ft.logMessage(fmt.Sprintf("LEADER_ERROR: Failed to get pod number: %v", err))

@@ -1,0 +1,834 @@
+[2025-08-24 11:51:25.543] CONNECTIVITY: Initial connectivity and consistency verified
+[2025-08-24 11:51:25.543] TEST_MODE: Running comprehensive failover tests (immediate + post-recovery)
+[2025-08-24 11:51:25.544] COMPREHENSIVE_TESTS_START: Enhanced failover testing with immediate and post-recovery read modes
+[2025-08-24 11:51:25.544] SCENARIO_START: Immediate Failure
+[2025-08-24 11:51:25.544] IMMEDIATE_READ_MODE: Testing immediate read capability for Immediate Failure with delay 0s
+[2025-08-24 11:51:25.545] IMMEDIATE_READ_TEST_START: imm-test-000001, Scenario: 0, Delay: 0s
+[2025-08-24 11:51:25.545] READY_LEADER_WAIT: Waiting for ready leader on partition 1
+[2025-08-24 11:51:25.561] READY_LEADER_IMMEDIATE: Partition 1 already has ready leader consensus-store-1-1, Term 5
+[2025-08-24 11:51:25.561] IMMEDIATE_WRITE: immediate-key-imm-test-000001 -> immediate-value-imm-test-000001-1756036285545767130 (partition 1, leader consensus-store-1-1)
+[2025-08-24 11:51:25.564] WRITE_COMPLETE: imm-test-000001 (duration: 2.265833ms)
+[2025-08-24 11:51:25.564] FORCED_TERMINATION: Terminating leader pod consensus-store-0 for partition 1
+[2025-08-24 11:51:25.568] TERMINATION_SUCCESS: Pod consensus-store-0 terminated
+[2025-08-24 11:51:25.569] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 11:51:25.573] IMMEDIATE_READ_SUCCESS: imm-test-000001 - Data readable immediately after failure
+[2025-08-24 11:51:25.573] LEADER_ELECTION_WAIT: Waiting for new leader on partition 1 (original term: 5)
+[2025-08-24 11:51:28.583] NEW_LEADER_ELECTED: Partition 1, Pod consensus-store-1-3, Term 6 (waiting for system stabilization...)
+[2025-08-24 11:51:30.593] LEADER_READY: Partition 1 leader consensus-store-1-3 is stable and ready for reads
+[2025-08-24 11:51:30.596] LEADER_RECOVERY: imm-test-000001 (duration: 5.031548586s)
+[2025-08-24 11:51:30.597] POST_RECOVERY_WAIT: imm-test-000001 - Waiting for system stabilization before verification read
+[2025-08-24 11:51:31.600] POST_RECOVERY_READ: imm-test-000001 - Attempting verification read
+[2025-08-24 11:51:31.614] POST_RECOVERY_READ_SUCCESS: imm-test-000001 - Data verified successfully after recovery
+[2025-08-24 11:51:31.615] IMMEDIATE_TEST_COMPLETE: imm-test-000001 - Post-recovery: success, Immediate: success (total duration: 6.052514878s)
+[2025-08-24 11:51:31.616] IMMEDIATE_TEST_RESULT: imm-test-000001 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 11:51:34.618] POST_RECOVERY_MODE: Testing post-recovery read for Immediate Failure with delay 0s
+[2025-08-24 11:51:34.621] PRECISION_TEST_START: test-000002, Scenario: 0, Delay: 0s
+[2025-08-24 11:51:34.626] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 11:52:19.630] POST_RECOVERY_RESULT: test-000002 - Success: false, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 11:52:21.635] SCENARIO_COMPLETE: Immediate Failure
+[2025-08-24 11:52:26.642] SCENARIO_START: During Replication
+[2025-08-24 11:52:26.647] IMMEDIATE_READ_MODE: Testing immediate read capability for During Replication with delay 50ms
+[2025-08-24 11:52:26.649] IMMEDIATE_READ_TEST_START: imm-test-000003, Scenario: 1, Delay: 50ms
+[2025-08-24 11:52:26.652] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 11:52:26.661] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-2, Term 2
+[2025-08-24 11:52:26.662] IMMEDIATE_WRITE: immediate-key-imm-test-000003 -> immediate-value-imm-test-000003-1756036346652894797 (partition 2, leader consensus-store-2-2)
+[2025-08-24 11:52:26.673] WRITE_COMPLETE: imm-test-000003 (duration: 8.967ms)
+[2025-08-24 11:52:26.674] IMMEDIATE_DELAY: Waiting 50ms before termination
+[2025-08-24 11:52:26.726] FORCED_TERMINATION: Terminating leader pod consensus-store-1 for partition 2
+[2025-08-24 11:52:26.738] TERMINATION_SUCCESS: Pod consensus-store-1 terminated
+[2025-08-24 11:52:26.741] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 11:52:26.838] IMMEDIATE_READ_SUCCESS: imm-test-000003 - Data readable immediately after failure
+[2025-08-24 11:52:26.844] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 2)
+[2025-08-24 11:52:31.852] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-1, Term 4 (waiting for system stabilization...)
+[2025-08-24 11:52:33.865] LEADER_READY: Partition 2 leader consensus-store-2-1 is stable and ready for reads
+[2025-08-24 11:52:33.868] LEADER_RECOVERY: imm-test-000003 (duration: 7.141518587s)
+[2025-08-24 11:52:33.870] POST_RECOVERY_WAIT: imm-test-000003 - Waiting for system stabilization before verification read
+[2025-08-24 11:52:34.873] POST_RECOVERY_READ: imm-test-000003 - Attempting verification read
+[2025-08-24 11:52:34.904] POST_RECOVERY_READ_SUCCESS: imm-test-000003 - Data verified successfully after recovery
+[2025-08-24 11:52:34.906] IMMEDIATE_TEST_COMPLETE: imm-test-000003 - Post-recovery: success, Immediate: success (total duration: 8.239610713s)
+[2025-08-24 11:52:34.906] IMMEDIATE_TEST_RESULT: imm-test-000003 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 11:52:37.911] POST_RECOVERY_MODE: Testing post-recovery read for During Replication with delay 50ms
+[2025-08-24 11:52:37.915] PRECISION_TEST_START: test-000004, Scenario: 1, Delay: 50ms
+[2025-08-24 11:52:37.919] READY_LEADER_WAIT: Waiting for ready leader on partition 1
+[2025-08-24 11:52:37.926] READY_LEADER_IMMEDIATE: Partition 1 already has ready leader consensus-store-1-3, Term 6
+[2025-08-24 11:52:37.928] PRECISION_WRITE: precision-key-test-000004 -> precision-value-test-000004-1756036357919892844 (partition 1, leader consensus-store-1-3)
+[2025-08-24 11:52:37.937] WRITE_COMPLETE: test-000004 (duration: 8.279917ms)
+[2025-08-24 11:52:37.938] PRECISION_DELAY: Waiting 50ms before termination
+[2025-08-24 11:52:37.989] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 1
+[2025-08-24 11:52:37.994] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 11:52:37.998] LEADER_ELECTION_WAIT: Waiting for new leader on partition 1 (original term: 6)
+[2025-08-24 11:52:40.001] NEW_LEADER_ELECTED: Partition 1, Pod consensus-store-1-2, Term 7 (waiting for system stabilization...)
+[2025-08-24 11:52:42.018] LEADER_READY: Partition 1 leader consensus-store-1-2 is stable and ready for reads
+[2025-08-24 11:52:42.023] LEADER_RECOVERY: test-000004 (duration: 4.034002419s)
+[2025-08-24 11:52:42.024] POST_RECOVERY_WAIT: test-000004 - Waiting for system stabilization before verification read
+[2025-08-24 11:52:43.029] POST_RECOVERY_READ: test-000004 - Attempting verification read
+[2025-08-24 11:52:43.046] POST_RECOVERY_READ_SUCCESS: test-000004 - Data verified successfully after recovery
+[2025-08-24 11:52:43.048] PRECISION_SUCCESS: test-000004 verified (total duration: 5.117682003s)
+[2025-08-24 11:52:43.049] POST_RECOVERY_RESULT: test-000004 - Success: true, Error: 
+[2025-08-24 11:52:45.052] IMMEDIATE_READ_MODE: Testing immediate read capability for During Replication with delay 100ms
+[2025-08-24 11:52:45.056] IMMEDIATE_READ_TEST_START: imm-test-000005, Scenario: 1, Delay: 100ms
+[2025-08-24 11:52:45.061] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 11:52:45.070] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-1, Term 4
+[2025-08-24 11:52:45.072] IMMEDIATE_WRITE: immediate-key-imm-test-000005 -> immediate-value-imm-test-000005-1756036365061453916 (partition 2, leader consensus-store-2-1)
+[2025-08-24 11:52:45.082] WRITE_COMPLETE: imm-test-000005 (duration: 8.770833ms)
+[2025-08-24 11:52:45.083] IMMEDIATE_DELAY: Waiting 100ms before termination
+[2025-08-24 11:52:45.188] FORCED_TERMINATION: Terminating leader pod consensus-store-0 for partition 2
+[2025-08-24 11:52:45.200] TERMINATION_SUCCESS: Pod consensus-store-0 terminated
+[2025-08-24 11:52:45.209] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 11:52:45.216] IMMEDIATE_READ_SUCCESS: imm-test-000005 - Data readable immediately after failure
+[2025-08-24 11:52:45.221] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 4)
+[2025-08-24 11:52:50.237] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-3, Term 5 (waiting for system stabilization...)
+[2025-08-24 11:52:52.247] LEADER_READY: Partition 2 leader consensus-store-2-3 is stable and ready for reads
+[2025-08-24 11:52:52.252] LEADER_RECOVERY: imm-test-000005 (duration: 7.063198629s)
+[2025-08-24 11:52:52.257] POST_RECOVERY_WAIT: imm-test-000005 - Waiting for system stabilization before verification read
+[2025-08-24 11:52:53.259] POST_RECOVERY_READ: imm-test-000005 - Attempting verification read
+[2025-08-24 11:52:53.281] POST_RECOVERY_READ_SUCCESS: imm-test-000005 - Data verified successfully after recovery
+[2025-08-24 11:52:53.283] IMMEDIATE_TEST_COMPLETE: imm-test-000005 - Post-recovery: success, Immediate: success (total duration: 8.208301545s)
+[2025-08-24 11:52:53.285] IMMEDIATE_TEST_RESULT: imm-test-000005 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 11:52:56.288] POST_RECOVERY_MODE: Testing post-recovery read for During Replication with delay 100ms
+[2025-08-24 11:52:56.290] PRECISION_TEST_START: test-000006, Scenario: 1, Delay: 100ms
+[2025-08-24 11:52:56.294] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 11:53:41.296] POST_RECOVERY_RESULT: test-000006 - Success: false, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 11:53:43.304] IMMEDIATE_READ_MODE: Testing immediate read capability for During Replication with delay 200ms
+[2025-08-24 11:53:43.309] IMMEDIATE_READ_TEST_START: imm-test-000007, Scenario: 1, Delay: 200ms
+[2025-08-24 11:53:43.331] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 11:53:43.336] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-3, Term 5
+[2025-08-24 11:53:43.337] IMMEDIATE_WRITE: immediate-key-imm-test-000007 -> immediate-value-imm-test-000007-1756036423331272763 (partition 2, leader consensus-store-2-3)
+[2025-08-24 11:53:43.346] WRITE_COMPLETE: imm-test-000007 (duration: 8.158041ms)
+[2025-08-24 11:53:43.347] IMMEDIATE_DELAY: Waiting 200ms before termination
+[2025-08-24 11:53:43.549] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 2
+[2025-08-24 11:53:43.561] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 11:53:43.572] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 11:53:43.579] IMMEDIATE_READ_SUCCESS: imm-test-000007 - Data readable immediately after failure
+[2025-08-24 11:53:43.580] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 5)
+[2025-08-24 11:53:47.593] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-1, Term 6 (waiting for system stabilization...)
+[2025-08-24 11:53:49.603] LEADER_READY: Partition 2 leader consensus-store-2-1 is stable and ready for reads
+[2025-08-24 11:53:49.605] LEADER_RECOVERY: imm-test-000007 (duration: 6.054561543s)
+[2025-08-24 11:53:49.608] POST_RECOVERY_WAIT: imm-test-000007 - Waiting for system stabilization before verification read
+[2025-08-24 11:53:50.611] POST_RECOVERY_READ: imm-test-000007 - Attempting verification read
+[2025-08-24 11:53:50.620] POST_RECOVERY_READ_SUCCESS: imm-test-000007 - Data verified successfully after recovery
+[2025-08-24 11:53:50.623] IMMEDIATE_TEST_COMPLETE: imm-test-000007 - Post-recovery: success, Immediate: success (total duration: 7.280405919s)
+[2025-08-24 11:53:50.629] IMMEDIATE_TEST_RESULT: imm-test-000007 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 11:53:53.637] POST_RECOVERY_MODE: Testing post-recovery read for During Replication with delay 200ms
+[2025-08-24 11:53:53.641] PRECISION_TEST_START: test-000008, Scenario: 1, Delay: 200ms
+[2025-08-24 11:53:53.646] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 11:53:53.658] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-1, Term 6
+[2025-08-24 11:53:53.659] PRECISION_WRITE: precision-key-test-000008 -> precision-value-test-000008-1756036433646769045 (partition 2, leader consensus-store-2-1)
+[2025-08-24 11:53:53.668] WRITE_COMPLETE: test-000008 (duration: 6.918666ms)
+[2025-08-24 11:53:53.669] PRECISION_DELAY: Waiting 200ms before termination
+[2025-08-24 11:53:53.870] FORCED_TERMINATION: Terminating leader pod consensus-store-0 for partition 2
+[2025-08-24 11:53:53.896] TERMINATION_SUCCESS: Pod consensus-store-0 terminated
+[2025-08-24 11:53:53.901] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 6)
+[2025-08-24 11:53:56.907] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-3, Term 7 (waiting for system stabilization...)
+[2025-08-24 11:53:58.915] LEADER_READY: Partition 2 leader consensus-store-2-3 is stable and ready for reads
+[2025-08-24 11:53:58.916] LEADER_RECOVERY: test-000008 (duration: 5.045435336s)
+[2025-08-24 11:53:58.916] POST_RECOVERY_WAIT: test-000008 - Waiting for system stabilization before verification read
+[2025-08-24 11:53:59.919] POST_RECOVERY_READ: test-000008 - Attempting verification read
+[2025-08-24 11:53:59.927] POST_RECOVERY_READ_SUCCESS: test-000008 - Data verified successfully after recovery
+[2025-08-24 11:53:59.932] PRECISION_SUCCESS: test-000008 verified (total duration: 6.266713794s)
+[2025-08-24 11:53:59.935] POST_RECOVERY_RESULT: test-000008 - Success: true, Error: 
+[2025-08-24 11:54:01.938] SCENARIO_COMPLETE: During Replication
+[2025-08-24 11:54:06.943] SCENARIO_START: Precision Timed
+[2025-08-24 11:54:06.948] IMMEDIATE_READ_MODE: Testing immediate read capability for Precision Timed with delay 10ms
+[2025-08-24 11:54:06.950] IMMEDIATE_READ_TEST_START: imm-test-000009, Scenario: 3, Delay: 10ms
+[2025-08-24 11:54:06.956] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 11:54:06.964] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-3, Term 7
+[2025-08-24 11:54:06.965] IMMEDIATE_WRITE: immediate-key-imm-test-000009 -> immediate-value-imm-test-000009-1756036446956055427 (partition 2, leader consensus-store-2-3)
+[2025-08-24 11:54:06.979] WRITE_COMPLETE: imm-test-000009 (duration: 13.163375ms)
+[2025-08-24 11:54:06.982] IMMEDIATE_DELAY: Waiting 10ms before termination
+[2025-08-24 11:54:06.993] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 2
+[2025-08-24 11:54:06.998] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 11:54:07.000] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 11:54:07.015] IMMEDIATE_READ_SUCCESS: imm-test-000009 - Data readable immediately after failure
+[2025-08-24 11:54:07.042] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 7)
+[2025-08-24 11:54:12.047] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-1, Term 9 (waiting for system stabilization...)
+[2025-08-24 11:54:14.058] LEADER_READY: Partition 2 leader consensus-store-2-1 is stable and ready for reads
+[2025-08-24 11:54:14.062] LEADER_RECOVERY: imm-test-000009 (duration: 7.06861617s)
+[2025-08-24 11:54:14.063] POST_RECOVERY_WAIT: imm-test-000009 - Waiting for system stabilization before verification read
+[2025-08-24 11:54:15.066] POST_RECOVERY_READ: imm-test-000009 - Attempting verification read
+[2025-08-24 11:54:15.087] POST_RECOVERY_READ_SUCCESS: imm-test-000009 - Data verified successfully after recovery
+[2025-08-24 11:54:15.088] IMMEDIATE_TEST_COMPLETE: imm-test-000009 - Post-recovery: success, Immediate: success (total duration: 8.12173817s)
+[2025-08-24 11:54:15.089] IMMEDIATE_TEST_RESULT: imm-test-000009 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 11:54:18.094] POST_RECOVERY_MODE: Testing post-recovery read for Precision Timed with delay 10ms
+[2025-08-24 11:54:18.097] PRECISION_TEST_START: test-000010, Scenario: 3, Delay: 10ms
+[2025-08-24 11:54:18.100] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 11:55:03.103] POST_RECOVERY_RESULT: test-000010 - Success: false, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 11:55:05.112] IMMEDIATE_READ_MODE: Testing immediate read capability for Precision Timed with delay 25ms
+[2025-08-24 11:55:05.118] IMMEDIATE_READ_TEST_START: imm-test-000011, Scenario: 3, Delay: 25ms
+[2025-08-24 11:55:05.126] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 11:55:50.128] IMMEDIATE_TEST_RESULT: imm-test-000011 - Post-recovery: false, Immediate: success, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 11:55:53.133] POST_RECOVERY_MODE: Testing post-recovery read for Precision Timed with delay 25ms
+[2025-08-24 11:55:53.134] PRECISION_TEST_START: test-000012, Scenario: 3, Delay: 25ms
+[2025-08-24 11:55:53.140] READY_LEADER_WAIT: Waiting for ready leader on partition 1
+[2025-08-24 11:55:53.143] READY_LEADER_IMMEDIATE: Partition 1 already has ready leader consensus-store-1-2, Term 7
+[2025-08-24 11:55:53.144] PRECISION_WRITE: precision-key-test-000012 -> precision-value-test-000012-1756036553140190004 (partition 1, leader consensus-store-1-2)
+[2025-08-24 11:55:53.148] WRITE_COMPLETE: test-000012 (duration: 4.269625ms)
+[2025-08-24 11:55:53.149] PRECISION_DELAY: Waiting 25ms before termination
+[2025-08-24 11:55:53.177] FORCED_TERMINATION: Terminating leader pod consensus-store-1 for partition 1
+[2025-08-24 11:55:53.182] TERMINATION_SUCCESS: Pod consensus-store-1 terminated
+[2025-08-24 11:55:53.184] LEADER_ELECTION_WAIT: Waiting for new leader on partition 1 (original term: 7)
+[2025-08-24 11:55:58.191] NEW_LEADER_ELECTED: Partition 1, Pod consensus-store-1-3, Term 8 (waiting for system stabilization...)
+[2025-08-24 11:56:00.206] LEADER_READY: Partition 1 leader consensus-store-1-3 is stable and ready for reads
+[2025-08-24 11:56:00.210] LEADER_RECOVERY: test-000012 (duration: 7.03295542s)
+[2025-08-24 11:56:00.213] POST_RECOVERY_WAIT: test-000012 - Waiting for system stabilization before verification read
+[2025-08-24 11:56:01.217] POST_RECOVERY_READ: test-000012 - Attempting verification read
+[2025-08-24 11:56:01.236] POST_RECOVERY_READ_SUCCESS: test-000012 - Data verified successfully after recovery
+[2025-08-24 11:56:01.238] PRECISION_SUCCESS: test-000012 verified (total duration: 8.091771421s)
+[2025-08-24 11:56:01.239] POST_RECOVERY_RESULT: test-000012 - Success: true, Error: 
+[2025-08-24 11:56:03.242] IMMEDIATE_READ_MODE: Testing immediate read capability for Precision Timed with delay 75ms
+[2025-08-24 11:56:03.247] IMMEDIATE_READ_TEST_START: imm-test-000013, Scenario: 3, Delay: 75ms
+[2025-08-24 11:56:03.250] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 11:56:48.259] IMMEDIATE_TEST_RESULT: imm-test-000013 - Post-recovery: false, Immediate: success, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 11:56:51.272] POST_RECOVERY_MODE: Testing post-recovery read for Precision Timed with delay 75ms
+[2025-08-24 11:56:51.276] PRECISION_TEST_START: test-000014, Scenario: 3, Delay: 75ms
+[2025-08-24 11:56:51.299] READY_LEADER_WAIT: Waiting for ready leader on partition 1
+[2025-08-24 11:56:51.304] READY_LEADER_IMMEDIATE: Partition 1 already has ready leader consensus-store-1-3, Term 8
+[2025-08-24 11:56:51.305] PRECISION_WRITE: precision-key-test-000014 -> precision-value-test-000014-1756036611299550544 (partition 1, leader consensus-store-1-3)
+[2025-08-24 11:56:51.316] WRITE_COMPLETE: test-000014 (duration: 9.677417ms)
+[2025-08-24 11:56:51.317] PRECISION_DELAY: Waiting 75ms before termination
+[2025-08-24 11:56:51.394] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 1
+[2025-08-24 11:56:51.403] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 11:56:51.420] LEADER_ELECTION_WAIT: Waiting for new leader on partition 1 (original term: 8)
+[2025-08-24 11:56:54.427] NEW_LEADER_ELECTED: Partition 1, Pod consensus-store-1-2, Term 9 (waiting for system stabilization...)
+[2025-08-24 11:56:56.439] LEADER_READY: Partition 1 leader consensus-store-1-2 is stable and ready for reads
+[2025-08-24 11:56:56.443] LEADER_RECOVERY: test-000014 (duration: 5.049146586s)
+[2025-08-24 11:56:56.446] POST_RECOVERY_WAIT: test-000014 - Waiting for system stabilization before verification read
+[2025-08-24 11:56:57.452] POST_RECOVERY_READ: test-000014 - Attempting verification read
+[2025-08-24 11:56:57.464] POST_RECOVERY_READ_SUCCESS: test-000014 - Data verified successfully after recovery
+[2025-08-24 11:56:57.466] PRECISION_SUCCESS: test-000014 verified (total duration: 6.158395253s)
+[2025-08-24 11:56:57.467] POST_RECOVERY_RESULT: test-000014 - Success: true, Error: 
+[2025-08-24 11:56:59.468] SCENARIO_COMPLETE: Precision Timed
+[2025-08-24 11:57:04.477] SCENARIO_START: Rapid Sequential
+[2025-08-24 11:57:04.482] IMMEDIATE_READ_MODE: Testing immediate read capability for Rapid Sequential with delay 0s
+[2025-08-24 11:57:04.485] IMMEDIATE_READ_TEST_START: imm-test-000015, Scenario: 2, Delay: 0s
+[2025-08-24 11:57:04.489] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 11:57:49.490] IMMEDIATE_TEST_RESULT: imm-test-000015 - Post-recovery: false, Immediate: success, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 11:57:52.495] POST_RECOVERY_MODE: Testing post-recovery read for Rapid Sequential with delay 0s
+[2025-08-24 11:57:52.499] PRECISION_TEST_START: test-000016, Scenario: 2, Delay: 0s
+[2025-08-24 11:57:52.506] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 11:57:52.517] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-1, Term 9
+[2025-08-24 11:57:52.519] PRECISION_WRITE: precision-key-test-000016 -> precision-value-test-000016-1756036672506230878 (partition 2, leader consensus-store-2-1)
+[2025-08-24 11:57:52.539] WRITE_COMPLETE: test-000016 (duration: 19.435834ms)
+[2025-08-24 11:57:52.541] FORCED_TERMINATION: Terminating leader pod consensus-store-0 for partition 2
+[2025-08-24 11:57:52.551] TERMINATION_SUCCESS: Pod consensus-store-0 terminated
+[2025-08-24 11:57:52.557] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 9)
+[2025-08-24 11:57:56.565] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-2, Term 10 (waiting for system stabilization...)
+[2025-08-24 11:57:58.577] LEADER_READY: Partition 2 leader consensus-store-2-2 is stable and ready for reads
+[2025-08-24 11:57:58.581] LEADER_RECOVERY: test-000016 (duration: 6.039933294s)
+[2025-08-24 11:57:58.584] POST_RECOVERY_WAIT: test-000016 - Waiting for system stabilization before verification read
+[2025-08-24 11:57:59.591] POST_RECOVERY_READ: test-000016 - Attempting verification read
+[2025-08-24 11:57:59.612] POST_RECOVERY_READ_SUCCESS: test-000016 - Data verified successfully after recovery
+[2025-08-24 11:57:59.613] PRECISION_SUCCESS: test-000016 verified (total duration: 7.092097879s)
+[2025-08-24 11:57:59.614] POST_RECOVERY_RESULT: test-000016 - Success: true, Error: 
+[2025-08-24 11:58:02.119] IMMEDIATE_READ_MODE: Testing immediate read capability for Rapid Sequential with delay 0s
+[2025-08-24 11:58:02.124] IMMEDIATE_READ_TEST_START: imm-test-000017, Scenario: 2, Delay: 0s
+[2025-08-24 11:58:02.127] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 11:58:47.129] IMMEDIATE_TEST_RESULT: imm-test-000017 - Post-recovery: false, Immediate: success, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 11:58:50.132] POST_RECOVERY_MODE: Testing post-recovery read for Rapid Sequential with delay 0s
+[2025-08-24 11:58:50.136] PRECISION_TEST_START: test-000018, Scenario: 2, Delay: 0s
+[2025-08-24 11:58:50.145] READY_LEADER_WAIT: Waiting for ready leader on partition 1
+[2025-08-24 11:58:50.151] READY_LEADER_IMMEDIATE: Partition 1 already has ready leader consensus-store-1-2, Term 9
+[2025-08-24 11:58:50.153] PRECISION_WRITE: precision-key-test-000018 -> precision-value-test-000018-1756036730145854710 (partition 1, leader consensus-store-1-2)
+[2025-08-24 11:58:50.168] WRITE_COMPLETE: test-000018 (duration: 14.557208ms)
+[2025-08-24 11:58:50.169] FORCED_TERMINATION: Terminating leader pod consensus-store-1 for partition 1
+[2025-08-24 11:58:50.176] TERMINATION_SUCCESS: Pod consensus-store-1 terminated
+[2025-08-24 11:58:50.178] LEADER_ELECTION_WAIT: Waiting for new leader on partition 1 (original term: 9)
+[2025-08-24 11:58:53.186] NEW_LEADER_ELECTED: Partition 1, Pod consensus-store-1-3, Term 10 (waiting for system stabilization...)
+[2025-08-24 11:58:55.204] LEADER_READY: Partition 1 leader consensus-store-1-3 is stable and ready for reads
+[2025-08-24 11:58:55.209] LEADER_RECOVERY: test-000018 (duration: 5.040224544s)
+[2025-08-24 11:58:55.212] POST_RECOVERY_WAIT: test-000018 - Waiting for system stabilization before verification read
+[2025-08-24 11:58:56.217] POST_RECOVERY_READ: test-000018 - Attempting verification read
+[2025-08-24 11:58:56.231] POST_RECOVERY_READ_SUCCESS: test-000018 - Data verified successfully after recovery
+[2025-08-24 11:58:56.232] PRECISION_SUCCESS: test-000018 verified (total duration: 6.077324919s)
+[2025-08-24 11:58:56.234] POST_RECOVERY_RESULT: test-000018 - Success: true, Error: 
+[2025-08-24 11:58:58.739] IMMEDIATE_READ_MODE: Testing immediate read capability for Rapid Sequential with delay 0s
+[2025-08-24 11:58:58.747] IMMEDIATE_READ_TEST_START: imm-test-000019, Scenario: 2, Delay: 0s
+[2025-08-24 11:58:58.759] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 11:58:58.767] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-1, Term 11
+[2025-08-24 11:58:58.768] IMMEDIATE_WRITE: immediate-key-imm-test-000019 -> immediate-value-imm-test-000019-1756036738759282548 (partition 2, leader consensus-store-2-1)
+[2025-08-24 11:58:58.778] WRITE_COMPLETE: imm-test-000019 (duration: 8.51325ms)
+[2025-08-24 11:58:58.780] FORCED_TERMINATION: Terminating leader pod consensus-store-0 for partition 2
+[2025-08-24 11:58:58.792] TERMINATION_SUCCESS: Pod consensus-store-0 terminated
+[2025-08-24 11:58:58.801] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 11:58:58.842] IMMEDIATE_READ_SUCCESS: imm-test-000019 - Data readable immediately after failure
+[2025-08-24 11:58:58.845] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 11)
+[2025-08-24 11:59:05.854] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-3, Term 13 (waiting for system stabilization...)
+[2025-08-24 11:59:07.875] LEADER_READY: Partition 2 leader consensus-store-2-3 is stable and ready for reads
+[2025-08-24 11:59:07.881] LEADER_RECOVERY: imm-test-000019 (duration: 9.100481629s)
+[2025-08-24 11:59:07.886] POST_RECOVERY_WAIT: imm-test-000019 - Waiting for system stabilization before verification read
+[2025-08-24 11:59:08.889] POST_RECOVERY_READ: imm-test-000019 - Attempting verification read
+[2025-08-24 11:59:08.904] POST_RECOVERY_READ_SUCCESS: imm-test-000019 - Data verified successfully after recovery
+[2025-08-24 11:59:08.905] IMMEDIATE_TEST_COMPLETE: imm-test-000019 - Post-recovery: success, Immediate: success (total duration: 10.134566755s)
+[2025-08-24 11:59:08.906] IMMEDIATE_TEST_RESULT: imm-test-000019 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 11:59:11.909] POST_RECOVERY_MODE: Testing post-recovery read for Rapid Sequential with delay 0s
+[2025-08-24 11:59:11.910] PRECISION_TEST_START: test-000020, Scenario: 2, Delay: 0s
+[2025-08-24 11:59:11.914] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 11:59:56.917] POST_RECOVERY_RESULT: test-000020 - Success: false, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 11:59:58.923] SCENARIO_COMPLETE: Rapid Sequential
+[2025-08-24 12:00:03.933] COMPREHENSIVE_TESTS_COMPLETE: 12/20 tests successful (60.0%)
+[2025-08-24 12:00:03.940] === COMPREHENSIVE TEST REPORT: IMMEDIATE vs POST-RECOVERY READS ===
+[2025-08-24 12:00:03.948] === SCENARIO COMPARISON SUMMARY ===
+[2025-08-24 12:00:03.950] SCENARIO: Immediate Failure
+[2025-08-24 12:00:03.951]   Post-Recovery Read: 0/1 success (0.0%), Avg Duration: 0s
+[2025-08-24 12:00:03.954]   Immediate Read: 1/1 post-recovery success (100.0%), 1/1 immediate success (100.0%), Avg Duration: 6.052514878s
+[2025-08-24 12:00:03.955] 
+[2025-08-24 12:00:03.956] SCENARIO: During Replication
+[2025-08-24 12:00:03.959]   Immediate Read: 3/3 post-recovery success (100.0%), 3/3 immediate success (100.0%), Avg Duration: 7.909439392s
+[2025-08-24 12:00:03.960]   Post-Recovery Read: 2/3 success (66.7%), Avg Duration: 5.692197898s
+[2025-08-24 12:00:03.961] 
+[2025-08-24 12:00:03.962] SCENARIO: Precision Timed
+[2025-08-24 12:00:03.963]   Immediate Read: 1/3 post-recovery success (33.3%), 3/3 immediate success (100.0%), Avg Duration: 8.12173817s
+[2025-08-24 12:00:03.964]   Post-Recovery Read: 2/3 success (66.7%), Avg Duration: 7.125083337s
+[2025-08-24 12:00:03.965] 
+[2025-08-24 12:00:03.966] SCENARIO: Rapid Sequential
+[2025-08-24 12:00:03.967]   Post-Recovery Read: 2/3 success (66.7%), Avg Duration: 6.584711399s
+[2025-08-24 12:00:03.968]   Immediate Read: 1/3 post-recovery success (33.3%), 3/3 immediate success (100.0%), Avg Duration: 10.134566755s
+[2025-08-24 12:00:03.969] 
+[2025-08-24 12:00:03.970] === READ MODE ANALYSIS ===
+[2025-08-24 12:00:03.971] IMMEDIATE_READ_ANALYSIS: 6/10 tests with post-recovery success (60.0%), 10/10 with immediate data access (100.0%)
+[2025-08-24 12:00:03.972] POST_RECOVERY_ANALYSIS: 6/10 tests successful (60.0%)
+[2025-08-24 12:00:03.972] COMPARATIVE_ANALYSIS: Data durability proven in 60.0% of immediate tests and 60.0% of post-recovery tests
+[2025-08-24 12:00:03.973] === INDIVIDUAL TEST DETAILS ===
+[2025-08-24 12:00:03.974] TEST_DETAIL: imm-test-000001 (Immediate Failure - Immediate Read) - Post-recovery: true, Immediate: success, Duration: 6.052514878s, Recovery: 5.031548586s
+[2025-08-24 12:00:03.975]   LEADERS: Before: consensus-store-1-1 (P1), After: consensus-store-1-3 (P1)
+[2025-08-24 12:00:03.975] TEST_DETAIL: test-000002 (Immediate Failure - Post-Recovery Read) - Success: false, Duration: 0s, Recovery: 0s
+[2025-08-24 12:00:03.976]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:00:03.976]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:00:03.977] TEST_DETAIL: imm-test-000003 (During Replication - Immediate Read) - Post-recovery: true, Immediate: success, Duration: 8.239610713s, Recovery: 7.141518587s
+[2025-08-24 12:00:03.977]   LEADERS: Before: consensus-store-2-2 (P2), After: consensus-store-2-1 (P2)
+[2025-08-24 12:00:03.978] TEST_DETAIL: test-000004 (During Replication - Post-Recovery Read) - Success: true, Duration: 5.117682003s, Recovery: 4.034002419s
+[2025-08-24 12:00:03.978]   LEADERS: Before: consensus-store-1-3 (P1), After: consensus-store-1-2 (P1)
+[2025-08-24 12:00:03.979] TEST_DETAIL: imm-test-000005 (During Replication - Immediate Read) - Post-recovery: true, Immediate: success, Duration: 8.208301545s, Recovery: 7.063198629s
+[2025-08-24 12:00:03.979]   LEADERS: Before: consensus-store-2-1 (P2), After: consensus-store-2-3 (P2)
+[2025-08-24 12:00:03.980] TEST_DETAIL: test-000006 (During Replication - Post-Recovery Read) - Success: false, Duration: 0s, Recovery: 0s
+[2025-08-24 12:00:03.981]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:00:03.981]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:00:03.982] TEST_DETAIL: imm-test-000007 (During Replication - Immediate Read) - Post-recovery: true, Immediate: success, Duration: 7.280405919s, Recovery: 6.054561543s
+[2025-08-24 12:00:03.983]   LEADERS: Before: consensus-store-2-3 (P2), After: consensus-store-2-1 (P2)
+[2025-08-24 12:00:03.983] TEST_DETAIL: test-000008 (During Replication - Post-Recovery Read) - Success: true, Duration: 6.266713794s, Recovery: 5.045435336s
+[2025-08-24 12:00:03.984]   LEADERS: Before: consensus-store-2-1 (P2), After: consensus-store-2-3 (P2)
+[2025-08-24 12:00:03.985] TEST_DETAIL: imm-test-000009 (Precision Timed - Immediate Read) - Post-recovery: true, Immediate: success, Duration: 8.12173817s, Recovery: 7.06861617s
+[2025-08-24 12:00:03.985]   LEADERS: Before: consensus-store-2-3 (P2), After: consensus-store-2-1 (P2)
+[2025-08-24 12:00:03.985] TEST_DETAIL: test-000010 (Precision Timed - Post-Recovery Read) - Success: false, Duration: 0s, Recovery: 0s
+[2025-08-24 12:00:03.986]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:00:03.987]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:00:03.987] TEST_DETAIL: imm-test-000011 (Precision Timed - Immediate Read) - Post-recovery: false, Immediate: success, Duration: 0s, Recovery: 0s
+[2025-08-24 12:00:03.988]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:00:03.989]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:00:03.989] TEST_DETAIL: test-000012 (Precision Timed - Post-Recovery Read) - Success: true, Duration: 8.091771421s, Recovery: 7.03295542s
+[2025-08-24 12:00:03.990]   LEADERS: Before: consensus-store-1-2 (P1), After: consensus-store-1-3 (P1)
+[2025-08-24 12:00:03.990] TEST_DETAIL: imm-test-000013 (Precision Timed - Immediate Read) - Post-recovery: false, Immediate: success, Duration: 0s, Recovery: 0s
+[2025-08-24 12:00:03.991]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:00:03.992]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:00:03.992] TEST_DETAIL: test-000014 (Precision Timed - Post-Recovery Read) - Success: true, Duration: 6.158395253s, Recovery: 5.049146586s
+[2025-08-24 12:00:03.993]   LEADERS: Before: consensus-store-1-3 (P1), After: consensus-store-1-2 (P1)
+[2025-08-24 12:00:03.993] TEST_DETAIL: imm-test-000015 (Rapid Sequential - Immediate Read) - Post-recovery: false, Immediate: success, Duration: 0s, Recovery: 0s
+[2025-08-24 12:00:03.994]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:00:03.995]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:00:03.995] TEST_DETAIL: test-000016 (Rapid Sequential - Post-Recovery Read) - Success: true, Duration: 7.092097879s, Recovery: 6.039933294s
+[2025-08-24 12:00:03.996]   LEADERS: Before: consensus-store-2-1 (P2), After: consensus-store-2-2 (P2)
+[2025-08-24 12:00:03.996] TEST_DETAIL: imm-test-000017 (Rapid Sequential - Immediate Read) - Post-recovery: false, Immediate: success, Duration: 0s, Recovery: 0s
+[2025-08-24 12:00:03.997]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:00:03.997]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:00:03.997] TEST_DETAIL: test-000018 (Rapid Sequential - Post-Recovery Read) - Success: true, Duration: 6.077324919s, Recovery: 5.040224544s
+[2025-08-24 12:00:03.998]   LEADERS: Before: consensus-store-1-2 (P1), After: consensus-store-1-3 (P1)
+[2025-08-24 12:00:03.998] TEST_DETAIL: imm-test-000019 (Rapid Sequential - Immediate Read) - Post-recovery: true, Immediate: success, Duration: 10.134566755s, Recovery: 9.100481629s
+[2025-08-24 12:00:03.999]   LEADERS: Before: consensus-store-2-1 (P2), After: consensus-store-2-3 (P2)
+[2025-08-24 12:00:03.999] TEST_DETAIL: test-000020 (Rapid Sequential - Post-Recovery Read) - Success: false, Duration: 0s, Recovery: 0s
+[2025-08-24 12:00:04.000]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:00:04.000]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:00:04.001] EXPERIMENT_COMPLETE: Comprehensive failover testing with immediate and post-recovery reads completed successfully
+[2025-08-24 12:00:04.663] CONNECTIVITY: Initial connectivity and consistency verified
+[2025-08-24 12:00:04.664] TEST_MODE: Running comprehensive failover tests (immediate + post-recovery)
+[2025-08-24 12:00:04.664] COMPREHENSIVE_TESTS_START: Enhanced failover testing with immediate and post-recovery read modes
+[2025-08-24 12:00:04.665] SCENARIO_START: Immediate Failure
+[2025-08-24 12:00:04.665] IMMEDIATE_READ_MODE: Testing immediate read capability for Immediate Failure with delay 0s
+[2025-08-24 12:00:04.665] IMMEDIATE_READ_TEST_START: imm-test-000001, Scenario: 0, Delay: 0s
+[2025-08-24 12:00:04.666] READY_LEADER_WAIT: Waiting for ready leader on partition 1
+[2025-08-24 12:00:04.671] READY_LEADER_IMMEDIATE: Partition 1 already has ready leader consensus-store-1-3, Term 10
+[2025-08-24 12:00:04.671] IMMEDIATE_WRITE: immediate-key-imm-test-000001 -> immediate-value-imm-test-000001-1756036804666461217 (partition 1, leader consensus-store-1-3)
+[2025-08-24 12:00:04.674] WRITE_COMPLETE: imm-test-000001 (duration: 2.833791ms)
+[2025-08-24 12:00:04.675] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 1
+[2025-08-24 12:00:04.679] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 12:00:04.681] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 12:00:04.685] IMMEDIATE_READ_SUCCESS: imm-test-000001 - Data readable immediately after failure
+[2025-08-24 12:00:04.690] LEADER_ELECTION_WAIT: Waiting for new leader on partition 1 (original term: 10)
+[2025-08-24 12:00:06.694] NEW_LEADER_ELECTED: Partition 1, Pod consensus-store-1-1, Term 11 (waiting for system stabilization...)
+[2025-08-24 12:00:08.703] LEADER_READY: Partition 1 leader consensus-store-1-1 is stable and ready for reads
+[2025-08-24 12:00:08.706] LEADER_RECOVERY: imm-test-000001 (duration: 4.030665669s)
+[2025-08-24 12:00:08.707] POST_RECOVERY_WAIT: imm-test-000001 - Waiting for system stabilization before verification read
+[2025-08-24 12:00:09.709] POST_RECOVERY_READ: imm-test-000001 - Attempting verification read
+[2025-08-24 12:00:09.727] POST_RECOVERY_READ_SUCCESS: imm-test-000001 - Data verified successfully after recovery
+[2025-08-24 12:00:09.728] IMMEDIATE_TEST_COMPLETE: imm-test-000001 - Post-recovery: success, Immediate: success (total duration: 5.055305669s)
+[2025-08-24 12:00:09.729] IMMEDIATE_TEST_RESULT: imm-test-000001 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 12:00:12.734] POST_RECOVERY_MODE: Testing post-recovery read for Immediate Failure with delay 0s
+[2025-08-24 12:00:12.736] PRECISION_TEST_START: test-000002, Scenario: 0, Delay: 0s
+[2025-08-24 12:00:12.741] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 12:00:57.743] POST_RECOVERY_RESULT: test-000002 - Success: false, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:00:59.748] SCENARIO_COMPLETE: Immediate Failure
+[2025-08-24 12:01:04.751] SCENARIO_START: During Replication
+[2025-08-24 12:01:04.754] IMMEDIATE_READ_MODE: Testing immediate read capability for During Replication with delay 50ms
+[2025-08-24 12:01:04.756] IMMEDIATE_READ_TEST_START: imm-test-000003, Scenario: 1, Delay: 50ms
+[2025-08-24 12:01:04.768] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 12:01:04.776] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-1, Term 14
+[2025-08-24 12:01:04.777] IMMEDIATE_WRITE: immediate-key-imm-test-000003 -> immediate-value-imm-test-000003-1756036864768133009 (partition 2, leader consensus-store-2-1)
+[2025-08-24 12:01:04.792] WRITE_COMPLETE: imm-test-000003 (duration: 14.910042ms)
+[2025-08-24 12:01:04.793] IMMEDIATE_DELAY: Waiting 50ms before termination
+[2025-08-24 12:01:04.844] FORCED_TERMINATION: Terminating leader pod consensus-store-0 for partition 2
+[2025-08-24 12:01:04.853] TERMINATION_SUCCESS: Pod consensus-store-0 terminated
+[2025-08-24 12:01:04.859] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 12:01:04.939] IMMEDIATE_READ_SUCCESS: imm-test-000003 - Data readable immediately after failure
+[2025-08-24 12:01:04.941] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 14)
+[2025-08-24 12:01:09.947] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-3, Term 16 (waiting for system stabilization...)
+[2025-08-24 12:01:11.958] LEADER_READY: Partition 2 leader consensus-store-2-3 is stable and ready for reads
+[2025-08-24 12:01:11.961] LEADER_RECOVERY: imm-test-000003 (duration: 7.117066045s)
+[2025-08-24 12:01:11.963] POST_RECOVERY_WAIT: imm-test-000003 - Waiting for system stabilization before verification read
+[2025-08-24 12:01:12.967] POST_RECOVERY_READ: imm-test-000003 - Attempting verification read
+[2025-08-24 12:01:12.983] POST_RECOVERY_READ_SUCCESS: imm-test-000003 - Data verified successfully after recovery
+[2025-08-24 12:01:12.985] IMMEDIATE_TEST_COMPLETE: imm-test-000003 - Post-recovery: success, Immediate: success (total duration: 8.205346754s)
+[2025-08-24 12:01:12.986] IMMEDIATE_TEST_RESULT: imm-test-000003 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 12:01:15.989] POST_RECOVERY_MODE: Testing post-recovery read for During Replication with delay 50ms
+[2025-08-24 12:01:15.991] PRECISION_TEST_START: test-000004, Scenario: 1, Delay: 50ms
+[2025-08-24 12:01:15.994] READY_LEADER_WAIT: Waiting for ready leader on partition 1
+[2025-08-24 12:01:16.000] READY_LEADER_IMMEDIATE: Partition 1 already has ready leader consensus-store-1-2, Term 12
+[2025-08-24 12:01:16.001] PRECISION_WRITE: precision-key-test-000004 -> precision-value-test-000004-1756036875994645500 (partition 1, leader consensus-store-1-2)
+[2025-08-24 12:01:16.010] WRITE_COMPLETE: test-000004 (duration: 7.68375ms)
+[2025-08-24 12:01:16.010] PRECISION_DELAY: Waiting 50ms before termination
+[2025-08-24 12:01:16.065] FORCED_TERMINATION: Terminating leader pod consensus-store-1 for partition 1
+[2025-08-24 12:01:16.072] TERMINATION_SUCCESS: Pod consensus-store-1 terminated
+[2025-08-24 12:01:16.075] LEADER_ELECTION_WAIT: Waiting for new leader on partition 1 (original term: 12)
+[2025-08-24 12:01:22.083] NEW_LEADER_ELECTED: Partition 1, Pod consensus-store-1-3, Term 14 (waiting for system stabilization...)
+[2025-08-24 12:01:24.092] LEADER_READY: Partition 1 leader consensus-store-1-3 is stable and ready for reads
+[2025-08-24 12:01:24.094] LEADER_RECOVERY: test-000004 (duration: 8.029085837s)
+[2025-08-24 12:01:24.095] POST_RECOVERY_WAIT: test-000004 - Waiting for system stabilization before verification read
+[2025-08-24 12:01:25.099] POST_RECOVERY_READ: test-000004 - Attempting verification read
+[2025-08-24 12:01:25.107] POST_RECOVERY_READ_SUCCESS: test-000004 - Data verified successfully after recovery
+[2025-08-24 12:01:25.109] PRECISION_SUCCESS: test-000004 verified (total duration: 9.104584921s)
+[2025-08-24 12:01:25.110] POST_RECOVERY_RESULT: test-000004 - Success: true, Error: 
+[2025-08-24 12:01:27.118] IMMEDIATE_READ_MODE: Testing immediate read capability for During Replication with delay 100ms
+[2025-08-24 12:01:27.120] IMMEDIATE_READ_TEST_START: imm-test-000005, Scenario: 1, Delay: 100ms
+[2025-08-24 12:01:27.124] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 12:01:27.131] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-3, Term 16
+[2025-08-24 12:01:27.132] IMMEDIATE_WRITE: immediate-key-imm-test-000005 -> immediate-value-imm-test-000005-1756036887124431089 (partition 2, leader consensus-store-2-3)
+[2025-08-24 12:01:27.142] WRITE_COMPLETE: imm-test-000005 (duration: 8.76325ms)
+[2025-08-24 12:01:27.143] IMMEDIATE_DELAY: Waiting 100ms before termination
+[2025-08-24 12:01:27.246] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 2
+[2025-08-24 12:01:27.258] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 12:01:27.265] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 12:01:27.271] IMMEDIATE_READ_SUCCESS: imm-test-000005 - Data readable immediately after failure
+[2025-08-24 12:01:27.273] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 16)
+[2025-08-24 12:01:32.282] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-1, Term 18 (waiting for system stabilization...)
+[2025-08-24 12:01:34.296] LEADER_READY: Partition 2 leader consensus-store-2-1 is stable and ready for reads
+[2025-08-24 12:01:34.299] LEADER_RECOVERY: imm-test-000005 (duration: 7.053147087s)
+[2025-08-24 12:01:34.300] POST_RECOVERY_WAIT: imm-test-000005 - Waiting for system stabilization before verification read
+[2025-08-24 12:01:35.304] POST_RECOVERY_READ: imm-test-000005 - Attempting verification read
+[2025-08-24 12:01:35.322] POST_RECOVERY_READ_SUCCESS: imm-test-000005 - Data verified successfully after recovery
+[2025-08-24 12:01:35.323] IMMEDIATE_TEST_COMPLETE: imm-test-000005 - Post-recovery: success, Immediate: success (total duration: 8.188109463s)
+[2025-08-24 12:01:35.324] IMMEDIATE_TEST_RESULT: imm-test-000005 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 12:01:38.327] POST_RECOVERY_MODE: Testing post-recovery read for During Replication with delay 100ms
+[2025-08-24 12:01:38.330] PRECISION_TEST_START: test-000006, Scenario: 1, Delay: 100ms
+[2025-08-24 12:01:38.335] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 12:02:23.335] POST_RECOVERY_RESULT: test-000006 - Success: false, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:02:25.341] IMMEDIATE_READ_MODE: Testing immediate read capability for During Replication with delay 200ms
+[2025-08-24 12:02:25.344] IMMEDIATE_READ_TEST_START: imm-test-000007, Scenario: 1, Delay: 200ms
+[2025-08-24 12:02:25.350] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 12:02:25.358] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-1, Term 18
+[2025-08-24 12:02:25.360] IMMEDIATE_WRITE: immediate-key-imm-test-000007 -> immediate-value-imm-test-000007-1756036945350721755 (partition 2, leader consensus-store-2-1)
+[2025-08-24 12:02:25.371] WRITE_COMPLETE: imm-test-000007 (duration: 10.699041ms)
+[2025-08-24 12:02:25.372] IMMEDIATE_DELAY: Waiting 200ms before termination
+[2025-08-24 12:02:25.573] FORCED_TERMINATION: Terminating leader pod consensus-store-0 for partition 2
+[2025-08-24 12:02:25.587] TERMINATION_SUCCESS: Pod consensus-store-0 terminated
+[2025-08-24 12:02:25.600] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 12:02:25.640] IMMEDIATE_READ_SUCCESS: imm-test-000007 - Data readable immediately after failure
+[2025-08-24 12:02:25.642] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 18)
+[2025-08-24 12:02:30.650] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-3, Term 19 (waiting for system stabilization...)
+[2025-08-24 12:02:32.661] LEADER_READY: Partition 2 leader consensus-store-2-3 is stable and ready for reads
+[2025-08-24 12:02:32.664] LEADER_RECOVERY: imm-test-000007 (duration: 7.090585295s)
+[2025-08-24 12:02:32.665] POST_RECOVERY_WAIT: imm-test-000007 - Waiting for system stabilization before verification read
+[2025-08-24 12:02:33.667] POST_RECOVERY_READ: imm-test-000007 - Attempting verification read
+[2025-08-24 12:02:33.684] POST_RECOVERY_READ_SUCCESS: imm-test-000007 - Data verified successfully after recovery
+[2025-08-24 12:02:33.685] IMMEDIATE_TEST_COMPLETE: imm-test-000007 - Post-recovery: success, Immediate: success (total duration: 8.323250087s)
+[2025-08-24 12:02:33.686] IMMEDIATE_TEST_RESULT: imm-test-000007 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 12:02:36.690] POST_RECOVERY_MODE: Testing post-recovery read for During Replication with delay 200ms
+[2025-08-24 12:02:36.692] PRECISION_TEST_START: test-000008, Scenario: 1, Delay: 200ms
+[2025-08-24 12:02:36.693] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 12:02:36.698] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-3, Term 19
+[2025-08-24 12:02:36.699] PRECISION_WRITE: precision-key-test-000008 -> precision-value-test-000008-1756036956693824635 (partition 2, leader consensus-store-2-3)
+[2025-08-24 12:02:36.704] WRITE_COMPLETE: test-000008 (duration: 5.264458ms)
+[2025-08-24 12:02:36.705] PRECISION_DELAY: Waiting 200ms before termination
+[2025-08-24 12:02:36.906] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 2
+[2025-08-24 12:02:36.920] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 12:02:36.924] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 19)
+[2025-08-24 12:02:42.932] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-1, Term 21 (waiting for system stabilization...)
+[2025-08-24 12:02:44.944] LEADER_READY: Partition 2 leader consensus-store-2-1 is stable and ready for reads
+[2025-08-24 12:02:44.948] LEADER_RECOVERY: test-000008 (duration: 8.041979295s)
+[2025-08-24 12:02:44.949] POST_RECOVERY_WAIT: test-000008 - Waiting for system stabilization before verification read
+[2025-08-24 12:02:45.951] POST_RECOVERY_READ: test-000008 - Attempting verification read
+[2025-08-24 12:02:45.958] POST_RECOVERY_READ_SUCCESS: test-000008 - Data verified successfully after recovery
+[2025-08-24 12:02:45.960] PRECISION_SUCCESS: test-000008 verified (total duration: 9.259516545s)
+[2025-08-24 12:02:45.962] POST_RECOVERY_RESULT: test-000008 - Success: true, Error: 
+[2025-08-24 12:02:47.964] SCENARIO_COMPLETE: During Replication
+[2025-08-24 12:02:52.969] SCENARIO_START: Precision Timed
+[2025-08-24 12:02:52.973] IMMEDIATE_READ_MODE: Testing immediate read capability for Precision Timed with delay 10ms
+[2025-08-24 12:02:52.974] IMMEDIATE_READ_TEST_START: imm-test-000009, Scenario: 3, Delay: 10ms
+[2025-08-24 12:02:52.978] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 12:02:52.984] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-1, Term 21
+[2025-08-24 12:02:52.985] IMMEDIATE_WRITE: immediate-key-imm-test-000009 -> immediate-value-imm-test-000009-1756036972978365712 (partition 2, leader consensus-store-2-1)
+[2025-08-24 12:02:52.993] WRITE_COMPLETE: imm-test-000009 (duration: 7.255083ms)
+[2025-08-24 12:02:52.993] IMMEDIATE_DELAY: Waiting 10ms before termination
+[2025-08-24 12:02:53.004] FORCED_TERMINATION: Terminating leader pod consensus-store-0 for partition 2
+[2025-08-24 12:02:53.010] TERMINATION_SUCCESS: Pod consensus-store-0 terminated
+[2025-08-24 12:02:53.016] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 12:02:53.029] IMMEDIATE_READ_SUCCESS: imm-test-000009 - Data readable immediately after failure
+[2025-08-24 12:02:53.032] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 21)
+[2025-08-24 12:02:57.036] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-3, Term 22 (waiting for system stabilization...)
+[2025-08-24 12:02:59.044] LEADER_READY: Partition 2 leader consensus-store-2-3 is stable and ready for reads
+[2025-08-24 12:02:59.046] LEADER_RECOVERY: imm-test-000009 (duration: 6.042198795s)
+[2025-08-24 12:02:59.048] POST_RECOVERY_WAIT: imm-test-000009 - Waiting for system stabilization before verification read
+[2025-08-24 12:03:00.050] POST_RECOVERY_READ: imm-test-000009 - Attempting verification read
+[2025-08-24 12:03:00.064] POST_RECOVERY_READ_SUCCESS: imm-test-000009 - Data verified successfully after recovery
+[2025-08-24 12:03:00.066] IMMEDIATE_TEST_COMPLETE: imm-test-000009 - Post-recovery: success, Immediate: success (total duration: 7.078694545s)
+[2025-08-24 12:03:00.067] IMMEDIATE_TEST_RESULT: imm-test-000009 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 12:03:03.074] POST_RECOVERY_MODE: Testing post-recovery read for Precision Timed with delay 10ms
+[2025-08-24 12:03:03.076] PRECISION_TEST_START: test-000010, Scenario: 3, Delay: 10ms
+[2025-08-24 12:03:03.079] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 12:03:48.080] POST_RECOVERY_RESULT: test-000010 - Success: false, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:03:50.086] IMMEDIATE_READ_MODE: Testing immediate read capability for Precision Timed with delay 25ms
+[2025-08-24 12:03:50.089] IMMEDIATE_READ_TEST_START: imm-test-000011, Scenario: 3, Delay: 25ms
+[2025-08-24 12:03:50.096] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 12:04:35.098] IMMEDIATE_TEST_RESULT: imm-test-000011 - Post-recovery: false, Immediate: success, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:04:38.105] POST_RECOVERY_MODE: Testing post-recovery read for Precision Timed with delay 25ms
+[2025-08-24 12:04:38.108] PRECISION_TEST_START: test-000012, Scenario: 3, Delay: 25ms
+[2025-08-24 12:04:38.114] READY_LEADER_WAIT: Waiting for ready leader on partition 1
+[2025-08-24 12:04:38.120] READY_LEADER_IMMEDIATE: Partition 1 already has ready leader consensus-store-1-2, Term 17
+[2025-08-24 12:04:38.121] PRECISION_WRITE: precision-key-test-000012 -> precision-value-test-000012-1756037078114422427 (partition 1, leader consensus-store-1-2)
+[2025-08-24 12:04:38.129] WRITE_COMPLETE: test-000012 (duration: 6.923167ms)
+[2025-08-24 12:04:38.130] PRECISION_DELAY: Waiting 25ms before termination
+[2025-08-24 12:04:38.157] FORCED_TERMINATION: Terminating leader pod consensus-store-1 for partition 1
+[2025-08-24 12:04:38.165] TERMINATION_SUCCESS: Pod consensus-store-1 terminated
+[2025-08-24 12:04:38.168] LEADER_ELECTION_WAIT: Waiting for new leader on partition 1 (original term: 17)
+[2025-08-24 12:04:41.191] NEW_LEADER_ELECTED: Partition 1, Pod consensus-store-1-3, Term 18 (waiting for system stabilization...)
+[2025-08-24 12:04:43.203] LEADER_READY: Partition 1 leader consensus-store-1-3 is stable and ready for reads
+[2025-08-24 12:04:43.205] LEADER_RECOVERY: test-000012 (duration: 5.048641085s)
+[2025-08-24 12:04:43.207] POST_RECOVERY_WAIT: test-000012 - Waiting for system stabilization before verification read
+[2025-08-24 12:04:44.210] POST_RECOVERY_READ: test-000012 - Attempting verification read
+[2025-08-24 12:04:44.218] POST_RECOVERY_READ_SUCCESS: test-000012 - Data verified successfully after recovery
+[2025-08-24 12:04:44.219] PRECISION_SUCCESS: test-000012 verified (total duration: 6.095387545s)
+[2025-08-24 12:04:44.221] POST_RECOVERY_RESULT: test-000012 - Success: true, Error: 
+[2025-08-24 12:04:46.224] IMMEDIATE_READ_MODE: Testing immediate read capability for Precision Timed with delay 75ms
+[2025-08-24 12:04:46.225] IMMEDIATE_READ_TEST_START: imm-test-000013, Scenario: 3, Delay: 75ms
+[2025-08-24 12:04:46.227] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 12:05:31.229] IMMEDIATE_TEST_RESULT: imm-test-000013 - Post-recovery: false, Immediate: success, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:05:34.235] POST_RECOVERY_MODE: Testing post-recovery read for Precision Timed with delay 75ms
+[2025-08-24 12:05:34.238] PRECISION_TEST_START: test-000014, Scenario: 3, Delay: 75ms
+[2025-08-24 12:05:34.244] READY_LEADER_WAIT: Waiting for ready leader on partition 1
+[2025-08-24 12:05:34.252] READY_LEADER_IMMEDIATE: Partition 1 already has ready leader consensus-store-1-3, Term 18
+[2025-08-24 12:05:34.253] PRECISION_WRITE: precision-key-test-000014 -> precision-value-test-000014-1756037134244289925 (partition 1, leader consensus-store-1-3)
+[2025-08-24 12:05:34.265] WRITE_COMPLETE: test-000014 (duration: 11.0755ms)
+[2025-08-24 12:05:34.266] PRECISION_DELAY: Waiting 75ms before termination
+[2025-08-24 12:05:34.342] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 1
+[2025-08-24 12:05:34.356] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 12:05:34.358] LEADER_ELECTION_WAIT: Waiting for new leader on partition 1 (original term: 18)
+[2025-08-24 12:05:39.361] NEW_LEADER_ELECTED: Partition 1, Pod consensus-store-1-2, Term 20 (waiting for system stabilization...)
+[2025-08-24 12:05:41.369] LEADER_READY: Partition 1 leader consensus-store-1-2 is stable and ready for reads
+[2025-08-24 12:05:41.371] LEADER_RECOVERY: test-000014 (duration: 7.029331253s)
+[2025-08-24 12:05:41.373] POST_RECOVERY_WAIT: test-000014 - Waiting for system stabilization before verification read
+[2025-08-24 12:05:42.375] POST_RECOVERY_READ: test-000014 - Attempting verification read
+[2025-08-24 12:05:42.392] POST_RECOVERY_READ_SUCCESS: test-000014 - Data verified successfully after recovery
+[2025-08-24 12:05:42.393] PRECISION_SUCCESS: test-000014 verified (total duration: 8.138110254s)
+[2025-08-24 12:05:42.394] POST_RECOVERY_RESULT: test-000014 - Success: true, Error: 
+[2025-08-24 12:05:44.397] SCENARIO_COMPLETE: Precision Timed
+[2025-08-24 12:05:49.407] SCENARIO_START: Rapid Sequential
+[2025-08-24 12:05:49.413] IMMEDIATE_READ_MODE: Testing immediate read capability for Rapid Sequential with delay 0s
+[2025-08-24 12:05:49.415] IMMEDIATE_READ_TEST_START: imm-test-000015, Scenario: 2, Delay: 0s
+[2025-08-24 12:05:49.419] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 12:06:34.421] IMMEDIATE_TEST_RESULT: imm-test-000015 - Post-recovery: false, Immediate: success, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:06:37.423] POST_RECOVERY_MODE: Testing post-recovery read for Rapid Sequential with delay 0s
+[2025-08-24 12:06:37.428] PRECISION_TEST_START: test-000016, Scenario: 2, Delay: 0s
+[2025-08-24 12:06:37.433] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 12:06:37.440] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-2, Term 24
+[2025-08-24 12:06:37.441] PRECISION_WRITE: precision-key-test-000016 -> precision-value-test-000016-1756037197433655552 (partition 2, leader consensus-store-2-2)
+[2025-08-24 12:06:37.456] WRITE_COMPLETE: test-000016 (duration: 14.025416ms)
+[2025-08-24 12:06:37.457] FORCED_TERMINATION: Terminating leader pod consensus-store-1 for partition 2
+[2025-08-24 12:06:37.463] TERMINATION_SUCCESS: Pod consensus-store-1 terminated
+[2025-08-24 12:06:37.465] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 24)
+[2025-08-24 12:06:41.472] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-1, Term 25 (waiting for system stabilization...)
+[2025-08-24 12:06:43.482] LEADER_READY: Partition 2 leader consensus-store-2-1 is stable and ready for reads
+[2025-08-24 12:06:43.485] LEADER_RECOVERY: test-000016 (duration: 6.02777392s)
+[2025-08-24 12:06:43.488] POST_RECOVERY_WAIT: test-000016 - Waiting for system stabilization before verification read
+[2025-08-24 12:06:44.490] POST_RECOVERY_READ: test-000016 - Attempting verification read
+[2025-08-24 12:06:44.492] POST_RECOVERY_READ_SUCCESS: test-000016 - Data verified successfully after recovery
+[2025-08-24 12:06:44.493] PRECISION_SUCCESS: test-000016 verified (total duration: 7.050096253s)
+[2025-08-24 12:06:44.493] POST_RECOVERY_RESULT: test-000016 - Success: true, Error: 
+[2025-08-24 12:06:46.995] IMMEDIATE_READ_MODE: Testing immediate read capability for Rapid Sequential with delay 0s
+[2025-08-24 12:06:46.998] IMMEDIATE_READ_TEST_START: imm-test-000017, Scenario: 2, Delay: 0s
+[2025-08-24 12:06:47.001] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 12:07:32.004] IMMEDIATE_TEST_RESULT: imm-test-000017 - Post-recovery: false, Immediate: success, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:07:35.009] POST_RECOVERY_MODE: Testing post-recovery read for Rapid Sequential with delay 0s
+[2025-08-24 12:07:35.013] PRECISION_TEST_START: test-000018, Scenario: 2, Delay: 0s
+[2025-08-24 12:07:35.019] READY_LEADER_WAIT: Waiting for ready leader on partition 1
+[2025-08-24 12:07:35.025] READY_LEADER_IMMEDIATE: Partition 1 already has ready leader consensus-store-1-3, Term 23
+[2025-08-24 12:07:35.026] PRECISION_WRITE: precision-key-test-000018 -> precision-value-test-000018-1756037255019905259 (partition 1, leader consensus-store-1-3)
+[2025-08-24 12:07:35.036] WRITE_COMPLETE: test-000018 (duration: 9.297792ms)
+[2025-08-24 12:07:35.037] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 1
+[2025-08-24 12:07:35.041] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 12:07:35.047] LEADER_ELECTION_WAIT: Waiting for new leader on partition 1 (original term: 23)
+[2025-08-24 12:07:39.059] NEW_LEADER_ELECTED: Partition 1, Pod consensus-store-1-1, Term 24 (waiting for system stabilization...)
+[2025-08-24 12:07:41.070] LEADER_READY: Partition 1 leader consensus-store-1-1 is stable and ready for reads
+[2025-08-24 12:07:41.072] LEADER_RECOVERY: test-000018 (duration: 6.03561917s)
+[2025-08-24 12:07:41.075] POST_RECOVERY_WAIT: test-000018 - Waiting for system stabilization before verification read
+[2025-08-24 12:07:42.080] POST_RECOVERY_READ: test-000018 - Attempting verification read
+[2025-08-24 12:07:42.085] POST_RECOVERY_READ_SUCCESS: test-000018 - Data verified successfully after recovery
+[2025-08-24 12:07:42.086] PRECISION_SUCCESS: test-000018 verified (total duration: 7.058293504s)
+[2025-08-24 12:07:42.086] POST_RECOVERY_RESULT: test-000018 - Success: true, Error: 
+[2025-08-24 12:07:44.589] IMMEDIATE_READ_MODE: Testing immediate read capability for Rapid Sequential with delay 0s
+[2025-08-24 12:07:44.592] IMMEDIATE_READ_TEST_START: imm-test-000019, Scenario: 2, Delay: 0s
+[2025-08-24 12:07:44.595] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 12:07:44.602] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-1, Term 25
+[2025-08-24 12:07:44.603] IMMEDIATE_WRITE: immediate-key-imm-test-000019 -> immediate-value-imm-test-000019-1756037264595455930 (partition 2, leader consensus-store-2-1)
+[2025-08-24 12:07:44.608] WRITE_COMPLETE: imm-test-000019 (duration: 3.983ms)
+[2025-08-24 12:07:44.608] FORCED_TERMINATION: Terminating leader pod consensus-store-0 for partition 2
+[2025-08-24 12:07:44.613] TERMINATION_SUCCESS: Pod consensus-store-0 terminated
+[2025-08-24 12:07:44.615] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 12:07:44.619] IMMEDIATE_READ_SUCCESS: imm-test-000019 - Data readable immediately after failure
+[2025-08-24 12:07:44.621] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 25)
+[2025-08-24 12:07:48.629] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-3, Term 26 (waiting for system stabilization...)
+[2025-08-24 12:07:50.641] LEADER_READY: Partition 2 leader consensus-store-2-3 is stable and ready for reads
+[2025-08-24 12:07:50.649] LEADER_RECOVERY: imm-test-000019 (duration: 6.039938002s)
+[2025-08-24 12:07:50.651] POST_RECOVERY_WAIT: imm-test-000019 - Waiting for system stabilization before verification read
+[2025-08-24 12:07:51.653] POST_RECOVERY_READ: imm-test-000019 - Attempting verification read
+[2025-08-24 12:07:51.668] POST_RECOVERY_READ_SUCCESS: imm-test-000019 - Data verified successfully after recovery
+[2025-08-24 12:07:51.669] IMMEDIATE_TEST_COMPLETE: imm-test-000019 - Post-recovery: success, Immediate: success (total duration: 7.063818586s)
+[2025-08-24 12:07:51.670] IMMEDIATE_TEST_RESULT: imm-test-000019 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 12:07:54.676] POST_RECOVERY_MODE: Testing post-recovery read for Rapid Sequential with delay 0s
+[2025-08-24 12:07:54.678] PRECISION_TEST_START: test-000020, Scenario: 2, Delay: 0s
+[2025-08-24 12:07:54.681] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 12:08:39.682] POST_RECOVERY_RESULT: test-000020 - Success: false, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:08:41.687] SCENARIO_COMPLETE: Rapid Sequential
+[2025-08-24 12:08:46.691] COMPREHENSIVE_TESTS_COMPLETE: 12/20 tests successful (60.0%)
+[2025-08-24 12:08:46.693] === COMPREHENSIVE TEST REPORT: IMMEDIATE vs POST-RECOVERY READS ===
+[2025-08-24 12:08:46.694] === SCENARIO COMPARISON SUMMARY ===
+[2025-08-24 12:08:46.695] SCENARIO: Immediate Failure
+[2025-08-24 12:08:46.695]   Immediate Read: 1/1 post-recovery success (100.0%), 1/1 immediate success (100.0%), Avg Duration: 5.055305669s
+[2025-08-24 12:08:46.696]   Post-Recovery Read: 0/1 success (0.0%), Avg Duration: 0s
+[2025-08-24 12:08:46.697] 
+[2025-08-24 12:08:46.697] SCENARIO: During Replication
+[2025-08-24 12:08:46.698]   Immediate Read: 3/3 post-recovery success (100.0%), 3/3 immediate success (100.0%), Avg Duration: 8.238902101s
+[2025-08-24 12:08:46.698]   Post-Recovery Read: 2/3 success (66.7%), Avg Duration: 9.182050733s
+[2025-08-24 12:08:46.699] 
+[2025-08-24 12:08:46.699] SCENARIO: Precision Timed
+[2025-08-24 12:08:46.700]   Post-Recovery Read: 2/3 success (66.7%), Avg Duration: 7.116748899s
+[2025-08-24 12:08:46.700]   Immediate Read: 1/3 post-recovery success (33.3%), 3/3 immediate success (100.0%), Avg Duration: 7.078694545s
+[2025-08-24 12:08:46.701] 
+[2025-08-24 12:08:46.702] SCENARIO: Rapid Sequential
+[2025-08-24 12:08:46.702]   Immediate Read: 1/3 post-recovery success (33.3%), 3/3 immediate success (100.0%), Avg Duration: 7.063818586s
+[2025-08-24 12:08:46.703]   Post-Recovery Read: 2/3 success (66.7%), Avg Duration: 7.054194878s
+[2025-08-24 12:08:46.703] 
+[2025-08-24 12:08:46.704] === READ MODE ANALYSIS ===
+[2025-08-24 12:08:46.704] IMMEDIATE_READ_ANALYSIS: 6/10 tests with post-recovery success (60.0%), 10/10 with immediate data access (100.0%)
+[2025-08-24 12:08:46.704] POST_RECOVERY_ANALYSIS: 6/10 tests successful (60.0%)
+[2025-08-24 12:08:46.705] COMPARATIVE_ANALYSIS: Data durability proven in 60.0% of immediate tests and 60.0% of post-recovery tests
+[2025-08-24 12:08:46.705] === INDIVIDUAL TEST DETAILS ===
+[2025-08-24 12:08:46.706] TEST_DETAIL: imm-test-000001 (Immediate Failure - Immediate Read) - Post-recovery: true, Immediate: success, Duration: 5.055305669s, Recovery: 4.030665669s
+[2025-08-24 12:08:46.706]   LEADERS: Before: consensus-store-1-3 (P1), After: consensus-store-1-1 (P1)
+[2025-08-24 12:08:46.706] TEST_DETAIL: test-000002 (Immediate Failure - Post-Recovery Read) - Success: false, Duration: 0s, Recovery: 0s
+[2025-08-24 12:08:46.707]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:08:46.708]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:08:46.708] TEST_DETAIL: imm-test-000003 (During Replication - Immediate Read) - Post-recovery: true, Immediate: success, Duration: 8.205346754s, Recovery: 7.117066045s
+[2025-08-24 12:08:46.708]   LEADERS: Before: consensus-store-2-1 (P2), After: consensus-store-2-3 (P2)
+[2025-08-24 12:08:46.709] TEST_DETAIL: test-000004 (During Replication - Post-Recovery Read) - Success: true, Duration: 9.104584921s, Recovery: 8.029085837s
+[2025-08-24 12:08:46.709]   LEADERS: Before: consensus-store-1-2 (P1), After: consensus-store-1-3 (P1)
+[2025-08-24 12:08:46.709] TEST_DETAIL: imm-test-000005 (During Replication - Immediate Read) - Post-recovery: true, Immediate: success, Duration: 8.188109463s, Recovery: 7.053147087s
+[2025-08-24 12:08:46.710]   LEADERS: Before: consensus-store-2-3 (P2), After: consensus-store-2-1 (P2)
+[2025-08-24 12:08:46.710] TEST_DETAIL: test-000006 (During Replication - Post-Recovery Read) - Success: false, Duration: 0s, Recovery: 0s
+[2025-08-24 12:08:46.711]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:08:46.711]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:08:46.711] TEST_DETAIL: imm-test-000007 (During Replication - Immediate Read) - Post-recovery: true, Immediate: success, Duration: 8.323250087s, Recovery: 7.090585295s
+[2025-08-24 12:08:46.712]   LEADERS: Before: consensus-store-2-1 (P2), After: consensus-store-2-3 (P2)
+[2025-08-24 12:08:46.712] TEST_DETAIL: test-000008 (During Replication - Post-Recovery Read) - Success: true, Duration: 9.259516545s, Recovery: 8.041979295s
+[2025-08-24 12:08:46.712]   LEADERS: Before: consensus-store-2-3 (P2), After: consensus-store-2-1 (P2)
+[2025-08-24 12:08:46.713] TEST_DETAIL: imm-test-000009 (Precision Timed - Immediate Read) - Post-recovery: true, Immediate: success, Duration: 7.078694545s, Recovery: 6.042198795s
+[2025-08-24 12:08:46.713]   LEADERS: Before: consensus-store-2-1 (P2), After: consensus-store-2-3 (P2)
+[2025-08-24 12:08:46.714] TEST_DETAIL: test-000010 (Precision Timed - Post-Recovery Read) - Success: false, Duration: 0s, Recovery: 0s
+[2025-08-24 12:08:46.714]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:08:46.714]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:08:46.715] TEST_DETAIL: imm-test-000011 (Precision Timed - Immediate Read) - Post-recovery: false, Immediate: success, Duration: 0s, Recovery: 0s
+[2025-08-24 12:08:46.716]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:08:46.720]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:08:46.721] TEST_DETAIL: test-000012 (Precision Timed - Post-Recovery Read) - Success: true, Duration: 6.095387545s, Recovery: 5.048641085s
+[2025-08-24 12:08:46.721]   LEADERS: Before: consensus-store-1-2 (P1), After: consensus-store-1-3 (P1)
+[2025-08-24 12:08:46.721] TEST_DETAIL: imm-test-000013 (Precision Timed - Immediate Read) - Post-recovery: false, Immediate: success, Duration: 0s, Recovery: 0s
+[2025-08-24 12:08:46.722]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:08:46.722]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:08:46.723] TEST_DETAIL: test-000014 (Precision Timed - Post-Recovery Read) - Success: true, Duration: 8.138110254s, Recovery: 7.029331253s
+[2025-08-24 12:08:46.723]   LEADERS: Before: consensus-store-1-3 (P1), After: consensus-store-1-2 (P1)
+[2025-08-24 12:08:46.723] TEST_DETAIL: imm-test-000015 (Rapid Sequential - Immediate Read) - Post-recovery: false, Immediate: success, Duration: 0s, Recovery: 0s
+[2025-08-24 12:08:46.724]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:08:46.724]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:08:46.724] TEST_DETAIL: test-000016 (Rapid Sequential - Post-Recovery Read) - Success: true, Duration: 7.050096253s, Recovery: 6.02777392s
+[2025-08-24 12:08:46.725]   LEADERS: Before: consensus-store-2-2 (P2), After: consensus-store-2-1 (P2)
+[2025-08-24 12:08:46.725] TEST_DETAIL: imm-test-000017 (Rapid Sequential - Immediate Read) - Post-recovery: false, Immediate: success, Duration: 0s, Recovery: 0s
+[2025-08-24 12:08:46.725]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:08:46.725]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:08:46.726] TEST_DETAIL: test-000018 (Rapid Sequential - Post-Recovery Read) - Success: true, Duration: 7.058293504s, Recovery: 6.03561917s
+[2025-08-24 12:08:46.726]   LEADERS: Before: consensus-store-1-3 (P1), After: consensus-store-1-1 (P1)
+[2025-08-24 12:08:46.726] TEST_DETAIL: imm-test-000019 (Rapid Sequential - Immediate Read) - Post-recovery: true, Immediate: success, Duration: 7.063818586s, Recovery: 6.039938002s
+[2025-08-24 12:08:46.727]   LEADERS: Before: consensus-store-2-1 (P2), After: consensus-store-2-3 (P2)
+[2025-08-24 12:08:46.727] TEST_DETAIL: test-000020 (Rapid Sequential - Post-Recovery Read) - Success: false, Duration: 0s, Recovery: 0s
+[2025-08-24 12:08:46.727]   POST_RECOVERY_ERROR: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:08:46.727]   LEADERS: Before:  (P0), After:  (P0)
+[2025-08-24 12:08:46.728] EXPERIMENT_COMPLETE: Comprehensive failover testing with immediate and post-recovery reads completed successfully
+[2025-08-24 12:09:01.563] CONNECTIVITY: Initial connectivity and consistency verified
+[2025-08-24 12:09:01.564] TEST_MODE: Running comprehensive failover tests (immediate + post-recovery)
+[2025-08-24 12:09:01.564] COMPREHENSIVE_TESTS_START: Enhanced failover testing with immediate and post-recovery read modes
+[2025-08-24 12:09:01.564] SCENARIO_START: Immediate Failure
+[2025-08-24 12:09:01.564] IMMEDIATE_READ_MODE: Testing immediate read capability for Immediate Failure with delay 0s
+[2025-08-24 12:09:01.565] IMMEDIATE_READ_TEST_START: imm-test-000001, Scenario: 0, Delay: 0s
+[2025-08-24 12:09:01.565] READY_LEADER_WAIT: Waiting for ready leader on partition 1
+[2025-08-24 12:09:01.569] READY_LEADER_IMMEDIATE: Partition 1 already has ready leader consensus-store-1-3, Term 25
+[2025-08-24 12:09:01.570] IMMEDIATE_WRITE: immediate-key-imm-test-000001 -> immediate-value-imm-test-000001-1756037341565670882 (partition 1, leader consensus-store-1-3)
+[2025-08-24 12:09:01.574] WRITE_COMPLETE: imm-test-000001 (duration: 3.566875ms)
+[2025-08-24 12:09:01.574] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 1
+[2025-08-24 12:09:01.577] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 12:09:01.577] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 12:09:01.579] IMMEDIATE_READ_SUCCESS: imm-test-000001 - Data readable immediately after failure
+[2025-08-24 12:09:01.580] LEADER_ELECTION_WAIT: Waiting for new leader on partition 1 (original term: 25)
+[2025-08-24 12:09:06.587] NEW_LEADER_ELECTED: Partition 1, Pod consensus-store-1-1, Term 26 (waiting for system stabilization...)
+[2025-08-24 12:09:08.597] LEADER_READY: Partition 1 leader consensus-store-1-1 is stable and ready for reads
+[2025-08-24 12:09:08.599] LEADER_RECOVERY: imm-test-000001 (duration: 7.024467878s)
+[2025-08-24 12:09:08.599] POST_RECOVERY_WAIT: imm-test-000001 - Waiting for system stabilization before verification read
+[2025-08-24 12:09:09.602] POST_RECOVERY_READ: imm-test-000001 - Attempting verification read
+[2025-08-24 12:09:09.611] POST_RECOVERY_READ_SUCCESS: imm-test-000001 - Data verified successfully after recovery
+[2025-08-24 12:09:09.613] IMMEDIATE_TEST_COMPLETE: imm-test-000001 - Post-recovery: success, Immediate: success (total duration: 8.040889546s)
+[2025-08-24 12:09:09.614] IMMEDIATE_TEST_RESULT: imm-test-000001 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 12:09:12.618] POST_RECOVERY_MODE: Testing post-recovery read for Immediate Failure with delay 0s
+[2025-08-24 12:09:12.622] PRECISION_TEST_START: test-000002, Scenario: 0, Delay: 0s
+[2025-08-24 12:09:12.625] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 12:09:57.628] POST_RECOVERY_RESULT: test-000002 - Success: false, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:09:59.631] SCENARIO_COMPLETE: Immediate Failure
+[2025-08-24 12:10:04.639] SCENARIO_START: During Replication
+[2025-08-24 12:10:04.643] IMMEDIATE_READ_MODE: Testing immediate read capability for During Replication with delay 50ms
+[2025-08-24 12:10:04.645] IMMEDIATE_READ_TEST_START: imm-test-000003, Scenario: 1, Delay: 50ms
+[2025-08-24 12:10:04.650] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 12:10:04.658] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-1, Term 27
+[2025-08-24 12:10:04.659] IMMEDIATE_WRITE: immediate-key-imm-test-000003 -> immediate-value-imm-test-000003-1756037404650819384 (partition 2, leader consensus-store-2-1)
+[2025-08-24 12:10:04.673] WRITE_COMPLETE: imm-test-000003 (duration: 12.745666ms)
+[2025-08-24 12:10:04.673] IMMEDIATE_DELAY: Waiting 50ms before termination
+[2025-08-24 12:10:04.725] FORCED_TERMINATION: Terminating leader pod consensus-store-0 for partition 2
+[2025-08-24 12:10:04.731] TERMINATION_SUCCESS: Pod consensus-store-0 terminated
+[2025-08-24 12:10:04.737] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 12:10:04.750] IMMEDIATE_READ_SUCCESS: imm-test-000003 - Data readable immediately after failure
+[2025-08-24 12:10:04.751] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 27)
+[2025-08-24 12:10:09.753] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-3, Term 29 (waiting for system stabilization...)
+[2025-08-24 12:10:11.760] LEADER_READY: Partition 2 leader consensus-store-2-3 is stable and ready for reads
+[2025-08-24 12:10:11.762] LEADER_RECOVERY: imm-test-000003 (duration: 7.036550337s)
+[2025-08-24 12:10:11.763] POST_RECOVERY_WAIT: imm-test-000003 - Waiting for system stabilization before verification read
+[2025-08-24 12:10:12.765] POST_RECOVERY_READ: imm-test-000003 - Attempting verification read
+[2025-08-24 12:10:12.780] POST_RECOVERY_READ_SUCCESS: imm-test-000003 - Data verified successfully after recovery
+[2025-08-24 12:10:12.781] IMMEDIATE_TEST_COMPLETE: imm-test-000003 - Post-recovery: success, Immediate: success (total duration: 8.119578795s)
+[2025-08-24 12:10:12.782] IMMEDIATE_TEST_RESULT: imm-test-000003 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 12:10:15.787] POST_RECOVERY_MODE: Testing post-recovery read for During Replication with delay 50ms
+[2025-08-24 12:10:15.790] PRECISION_TEST_START: test-000004, Scenario: 1, Delay: 50ms
+[2025-08-24 12:10:15.794] READY_LEADER_WAIT: Waiting for ready leader on partition 1
+[2025-08-24 12:10:15.803] READY_LEADER_IMMEDIATE: Partition 1 already has ready leader consensus-store-1-3, Term 27
+[2025-08-24 12:10:15.805] PRECISION_WRITE: precision-key-test-000004 -> precision-value-test-000004-1756037415794018292 (partition 1, leader consensus-store-1-3)
+[2025-08-24 12:10:15.813] WRITE_COMPLETE: test-000004 (duration: 6.735208ms)
+[2025-08-24 12:10:15.814] PRECISION_DELAY: Waiting 50ms before termination
+[2025-08-24 12:10:15.865] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 1
+[2025-08-24 12:10:15.872] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 12:10:15.874] LEADER_ELECTION_WAIT: Waiting for new leader on partition 1 (original term: 27)
+[2025-08-24 12:10:22.882] NEW_LEADER_ELECTED: Partition 1, Pod consensus-store-1-3, Term 29 (waiting for system stabilization...)
+[2025-08-24 12:10:24.891] LEADER_READY: Partition 1 leader consensus-store-1-3 is stable and ready for reads
+[2025-08-24 12:10:24.893] LEADER_RECOVERY: test-000004 (duration: 9.027810504s)
+[2025-08-24 12:10:24.894] POST_RECOVERY_WAIT: test-000004 - Waiting for system stabilization before verification read
+[2025-08-24 12:10:25.895] POST_RECOVERY_READ: test-000004 - Attempting verification read
+[2025-08-24 12:10:25.903] POST_RECOVERY_READ_SUCCESS: test-000004 - Data verified successfully after recovery
+[2025-08-24 12:10:25.905] PRECISION_SUCCESS: test-000004 verified (total duration: 10.097084629s)
+[2025-08-24 12:10:25.906] POST_RECOVERY_RESULT: test-000004 - Success: true, Error: 
+[2025-08-24 12:10:27.909] IMMEDIATE_READ_MODE: Testing immediate read capability for During Replication with delay 100ms
+[2025-08-24 12:10:27.911] IMMEDIATE_READ_TEST_START: imm-test-000005, Scenario: 1, Delay: 100ms
+[2025-08-24 12:10:27.914] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 12:10:27.918] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-2, Term 30
+[2025-08-24 12:10:27.919] IMMEDIATE_WRITE: immediate-key-imm-test-000005 -> immediate-value-imm-test-000005-1756037427914162547 (partition 2, leader consensus-store-2-2)
+[2025-08-24 12:10:27.923] WRITE_COMPLETE: imm-test-000005 (duration: 4.177375ms)
+[2025-08-24 12:10:27.924] IMMEDIATE_DELAY: Waiting 100ms before termination
+[2025-08-24 12:10:28.026] FORCED_TERMINATION: Terminating leader pod consensus-store-1 for partition 2
+[2025-08-24 12:10:28.036] TERMINATION_SUCCESS: Pod consensus-store-1 terminated
+[2025-08-24 12:10:28.038] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 12:10:28.043] IMMEDIATE_READ_SUCCESS: imm-test-000005 - Data readable immediately after failure
+[2025-08-24 12:10:28.045] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 30)
+[2025-08-24 12:10:34.051] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-3, Term 32 (waiting for system stabilization...)
+[2025-08-24 12:10:36.057] LEADER_READY: Partition 2 leader consensus-store-2-3 is stable and ready for reads
+[2025-08-24 12:10:36.059] LEADER_RECOVERY: imm-test-000005 (duration: 8.032443754s)
+[2025-08-24 12:10:36.059] POST_RECOVERY_WAIT: imm-test-000005 - Waiting for system stabilization before verification read
+[2025-08-24 12:10:37.062] POST_RECOVERY_READ: imm-test-000005 - Attempting verification read
+[2025-08-24 12:10:37.078] POST_RECOVERY_READ_SUCCESS: imm-test-000005 - Data verified successfully after recovery
+[2025-08-24 12:10:37.080] IMMEDIATE_TEST_COMPLETE: imm-test-000005 - Post-recovery: success, Immediate: success (total duration: 9.158529712s)
+[2025-08-24 12:10:37.081] IMMEDIATE_TEST_RESULT: imm-test-000005 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 12:10:40.088] POST_RECOVERY_MODE: Testing post-recovery read for During Replication with delay 100ms
+[2025-08-24 12:10:40.091] PRECISION_TEST_START: test-000006, Scenario: 1, Delay: 100ms
+[2025-08-24 12:10:40.095] READY_LEADER_WAIT: Waiting for ready leader on partition 0
+[2025-08-24 12:11:25.096] POST_RECOVERY_RESULT: test-000006 - Success: false, Error: Failed to find ready leader: timeout waiting for ready leader on partition 0 after 45 seconds
+[2025-08-24 12:11:27.101] IMMEDIATE_READ_MODE: Testing immediate read capability for During Replication with delay 200ms
+[2025-08-24 12:11:27.104] IMMEDIATE_READ_TEST_START: imm-test-000007, Scenario: 1, Delay: 200ms
+[2025-08-24 12:11:27.111] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 12:11:27.119] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-3, Term 32
+[2025-08-24 12:11:27.121] IMMEDIATE_WRITE: immediate-key-imm-test-000007 -> immediate-value-imm-test-000007-1756037487111456755 (partition 2, leader consensus-store-2-3)
+[2025-08-24 12:11:27.134] WRITE_COMPLETE: imm-test-000007 (duration: 11.899375ms)
+[2025-08-24 12:11:27.134] IMMEDIATE_DELAY: Waiting 200ms before termination
+[2025-08-24 12:11:27.335] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 2
+[2025-08-24 12:11:27.350] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 12:11:27.356] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 12:11:27.363] IMMEDIATE_READ_SUCCESS: imm-test-000007 - Data readable immediately after failure
+[2025-08-24 12:11:27.367] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 32)
+[2025-08-24 12:11:30.378] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-2, Term 33 (waiting for system stabilization...)
+[2025-08-24 12:11:32.387] LEADER_READY: Partition 2 leader consensus-store-2-2 is stable and ready for reads
+[2025-08-24 12:11:32.389] LEADER_RECOVERY: imm-test-000007 (duration: 5.054251544s)
+[2025-08-24 12:11:32.391] POST_RECOVERY_WAIT: imm-test-000007 - Waiting for system stabilization before verification read
+[2025-08-24 12:11:33.393] POST_RECOVERY_READ: imm-test-000007 - Attempting verification read
+[2025-08-24 12:11:33.412] POST_RECOVERY_READ_SUCCESS: imm-test-000007 - Data verified successfully after recovery
+[2025-08-24 12:11:33.414] IMMEDIATE_TEST_COMPLETE: imm-test-000007 - Post-recovery: success, Immediate: success (total duration: 6.29078192s)
+[2025-08-24 12:11:33.415] IMMEDIATE_TEST_RESULT: imm-test-000007 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 12:11:36.419] POST_RECOVERY_MODE: Testing post-recovery read for During Replication with delay 200ms
+[2025-08-24 12:11:36.422] PRECISION_TEST_START: test-000008, Scenario: 1, Delay: 200ms
+[2025-08-24 12:11:36.424] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 12:11:36.432] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-2, Term 33
+[2025-08-24 12:11:36.433] PRECISION_WRITE: precision-key-test-000008 -> precision-value-test-000008-1756037496424723760 (partition 2, leader consensus-store-2-2)
+[2025-08-24 12:11:36.444] WRITE_COMPLETE: test-000008 (duration: 9.920625ms)
+[2025-08-24 12:11:36.444] PRECISION_DELAY: Waiting 200ms before termination
+[2025-08-24 12:11:36.646] FORCED_TERMINATION: Terminating leader pod consensus-store-1 for partition 2
+[2025-08-24 12:11:36.657] TERMINATION_SUCCESS: Pod consensus-store-1 terminated
+[2025-08-24 12:11:36.658] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 33)
+[2025-08-24 12:11:42.663] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-3, Term 35 (waiting for system stabilization...)
+[2025-08-24 12:11:44.672] LEADER_READY: Partition 2 leader consensus-store-2-3 is stable and ready for reads
+[2025-08-24 12:11:44.674] LEADER_RECOVERY: test-000008 (duration: 8.027392962s)
+[2025-08-24 12:11:44.675] POST_RECOVERY_WAIT: test-000008 - Waiting for system stabilization before verification read
+[2025-08-24 12:11:45.680] POST_RECOVERY_READ: test-000008 - Attempting verification read
+[2025-08-24 12:11:45.694] POST_RECOVERY_READ_SUCCESS: test-000008 - Data verified successfully after recovery
+[2025-08-24 12:11:45.697] PRECISION_SUCCESS: test-000008 verified (total duration: 9.259769212s)
+[2025-08-24 12:11:45.698] POST_RECOVERY_RESULT: test-000008 - Success: true, Error: 
+[2025-08-24 12:11:47.703] SCENARIO_COMPLETE: During Replication
+[2025-08-24 12:11:52.715] SCENARIO_START: Precision Timed
+[2025-08-24 12:11:52.725] IMMEDIATE_READ_MODE: Testing immediate read capability for Precision Timed with delay 10ms
+[2025-08-24 12:11:52.726] IMMEDIATE_READ_TEST_START: imm-test-000009, Scenario: 3, Delay: 10ms
+[2025-08-24 12:11:52.729] READY_LEADER_WAIT: Waiting for ready leader on partition 2
+[2025-08-24 12:11:52.736] READY_LEADER_IMMEDIATE: Partition 2 already has ready leader consensus-store-2-3, Term 35
+[2025-08-24 12:11:52.736] IMMEDIATE_WRITE: immediate-key-imm-test-000009 -> immediate-value-imm-test-000009-1756037512729908503 (partition 2, leader consensus-store-2-3)
+[2025-08-24 12:11:52.745] WRITE_COMPLETE: imm-test-000009 (duration: 7.16875ms)
+[2025-08-24 12:11:52.745] IMMEDIATE_DELAY: Waiting 10ms before termination
+[2025-08-24 12:11:52.756] FORCED_TERMINATION: Terminating leader pod consensus-store-2 for partition 2
+[2025-08-24 12:11:52.761] TERMINATION_SUCCESS: Pod consensus-store-2 terminated
+[2025-08-24 12:11:52.763] IMMEDIATE_READ_ATTEMPT: Trying immediate read after leader termination
+[2025-08-24 12:11:52.767] IMMEDIATE_READ_SUCCESS: imm-test-000009 - Data readable immediately after failure
+[2025-08-24 12:11:52.768] LEADER_ELECTION_WAIT: Waiting for new leader on partition 2 (original term: 35)
+[2025-08-24 12:11:57.771] NEW_LEADER_ELECTED: Partition 2, Pod consensus-store-2-2, Term 36 (waiting for system stabilization...)
+[2025-08-24 12:11:59.778] LEADER_READY: Partition 2 leader consensus-store-2-2 is stable and ready for reads
+[2025-08-24 12:11:59.780] LEADER_RECOVERY: imm-test-000009 (duration: 7.024695711s)
+[2025-08-24 12:11:59.782] POST_RECOVERY_WAIT: imm-test-000009 - Waiting for system stabilization before verification read
+[2025-08-24 12:12:00.786] POST_RECOVERY_READ: imm-test-000009 - Attempting verification read
+[2025-08-24 12:12:00.802] POST_RECOVERY_READ_SUCCESS: imm-test-000009 - Data verified successfully after recovery
+[2025-08-24 12:12:00.804] IMMEDIATE_TEST_COMPLETE: imm-test-000009 - Post-recovery: success, Immediate: success (total duration: 8.06494642s)
+[2025-08-24 12:12:00.804] IMMEDIATE_TEST_RESULT: imm-test-000009 - Post-recovery: true, Immediate: success, Error: 
+[2025-08-24 12:12:03.808] POST_RECOVERY_MODE: Testing post-recovery read for Precision Timed with delay 10ms
+[2025-08-24 12:12:03.812] PRECISION_TEST_START: test-000010, Scenario: 3, Delay: 10ms
+[2025-08-24 12:12:03.816] READY_LEADER_WAIT: Waiting for ready leader on partition 0

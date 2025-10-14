@@ -1,0 +1,8 @@
+apiVersion: atomix.io/v3beta3
+kind: StorageProfile
+metadata:
+  name: test-profile
+spec:
+  bindings:
+    - store:
+        name: test-test-store

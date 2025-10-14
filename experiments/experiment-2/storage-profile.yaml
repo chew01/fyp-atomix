@@ -6,3 +6,5 @@ spec:
   bindings:
     - store:
         name: consensus-store
+    - store:
+        name: test-store

@@ -41,4 +41,6 @@ func main() {
 	}
 
 	fmt.Println("Map primitive test completed successfully")
+	select {}
+
 }
