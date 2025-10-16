@@ -62,11 +62,6 @@ func RunElection(ctx context.Context, hostname string, e election.Election, dev 
 				dev.ApplyConfig(ctx, config)
 			} else {
 				log.Printf("[Leadership] (%s) ℹ️ Current leader: %s", electionName, term.Leader)
-				/*
-					if val, err := configMap.Get(ctx, e.Name()); err == nil {
-						log.Printf("[Leadership] (%s) Follower sees: %s", electionName, val.Value)
-					}
-				*/
 			}
 		}
 		cache = term

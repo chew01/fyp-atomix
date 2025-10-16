@@ -9,7 +9,6 @@ import (
 
 	"github.com/atomix/go-sdk/pkg/atomix"
 	"github.com/atomix/go-sdk/pkg/generic"
-	"github.com/atomix/go-sdk/pkg/primitive/election"
 )
 
 func StartHeartbeat(ctx context.Context, hostname string, interval time.Duration) {
@@ -39,7 +38,7 @@ func StartHeartbeat(ctx context.Context, hostname string, interval time.Duration
 	}
 }
 
-func MonitorHeartbeat(ctx context.Context, threshold time.Duration, elections []election.Election) {
+func MonitorHeartbeat(ctx context.Context, threshold time.Duration, evictAll func(hostname string)) {
 	heartbeatMap, err := atomix.Map[string, int64]("heartbeat").
 		Codec(generic.Scalar[int64]()).
 		Get(ctx)
@@ -74,12 +73,8 @@ func MonitorHeartbeat(ctx context.Context, threshold time.Duration, elections []
 						log.Printf("[Heartbeat] Failed to remove offline node from heartbeat map: %v", err)
 					}
 					membership.Remove(ctx, hostname)
-					for _, e := range elections {
-						_, err := e.Evict(ctx, hostname)
-						if err != nil {
-							log.Printf("[Heartbeat/Leadership] Failed to evict offline node from election: %v", err)
-						}
-					}
+					log.Printf("[Membership] Evicting node %s from all elections", hostname)
+					evictAll(hostname)
 				}
 			}
 		}
