@@ -11,6 +11,8 @@ func (s *Server) NewRouter() *mux.Router {
 	r.HandleFunc("/health", s.HealthHandler).Methods("GET")
 	// Membership
 	r.HandleFunc("/members", s.GetMembersHandler).Methods("GET")
+	// Devices
+	r.HandleFunc("/devices", s.ListDevicesHandler).Methods("GET")
 	r.HandleFunc("/devices", s.AddDeviceHandler).Methods("POST")
 
 	return r

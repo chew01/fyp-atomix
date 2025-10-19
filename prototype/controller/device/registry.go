@@ -35,7 +35,7 @@ func Monitor(ctx context.Context, start func(string, *Device), stop func(string)
 		entry, err := stream.Next()
 		if err != nil {
 			log.Printf("[Devices] Error in device stream: %v", err)
-			continue
+			return
 		}
 		log.Printf("[Devices] Device event: %s", entry.String())
 		dev := &Device{
