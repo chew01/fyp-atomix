@@ -19,6 +19,7 @@ echo "Docker image loaded."
 echo "Applying kubernetes configs..."
 kubectl apply -f ./deploy/atomix/store.yaml
 kubectl apply -f ./deploy/atomix/storage-profile.yaml
+kubectl apply -f ./deploy/controller/controller-rbac.yaml
 kubectl apply -f ./deploy/controller/deployment.yaml
 kubectl expose deployment prototype --type=NodePort --port=8080
 kubectl apply -f ./deploy/controller/ingress.yaml

@@ -2,12 +2,8 @@ package api
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"time"
-
-	"github.com/atomix/go-sdk/pkg/atomix"
-	"github.com/atomix/go-sdk/pkg/generic"
 )
 
 type MembersResponse struct {
@@ -17,31 +13,12 @@ type MembersResponse struct {
 }
 
 func (s *Server) GetMembersHandler(w http.ResponseWriter, r *http.Request) {
-	ctx := s.ctx
-
-	membershipSet, err := atomix.Set[string]("membership").
-		Codec(generic.Scalar[string]()).
-		Get(ctx)
-	if err != nil {
-		http.Error(w, "Failed to access membership set", http.StatusInternalServerError)
-		log.Printf("[Membership] Failed to get set: %v", err)
-		return
-	}
-	defer membershipSet.Close(ctx)
+	membershipManager := s.membershipManager
 
 	// Collect all members
 	var members []string
-	stream, err := membershipSet.Elements(ctx)
-	if err != nil {
-		http.Error(w, "Failed to read membership elements", http.StatusInternalServerError)
-		return
-	}
-	for {
-		elem, err := stream.Next()
-		if err != nil {
-			break // end of stream
-		}
-		members = append(members, elem)
+	for member := range membershipManager.Active {
+		members = append(members, member)
 	}
 
 	resp := MembersResponse{

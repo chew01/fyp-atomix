@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: controller-sa
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: controller-membership-role
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: controller-membership-binding
+subjects:
+- kind: ServiceAccount
+  name: controller-sa
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: controller-membership-role
+  apiGroup: rbac.authorization.k8s.io

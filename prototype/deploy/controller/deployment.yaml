@@ -14,6 +14,7 @@ spec:
         proxy.atomix.io/inject: "true"
         proxy.atomix.io/profile: "prototype-profile"
     spec:
+      serviceAccountName: controller-sa
       containers:
       - name: prototype-controller
         image: prototype-controller:local
